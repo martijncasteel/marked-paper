@@ -7,7 +7,7 @@ var fs = require('fs');
 router.get('/', function(req, res, next) {
   fs.readdir('./cache', function(err, items) {
 
-    res.render('index', {
+    res.render('index.haml', {
       posts: items.filter(function(item){
 
         // only html files
