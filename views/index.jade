@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  article
+    h2 What is it about?
+
+    p Well about me, #[strong Martijn Casteel], at easy as that!
+
+    p A lone writer, writing about some thrilling encounters mainly in IT. First exciting point to elaborate; Who am I? Quoted from a strange movie with Jackie Chan. Well I'm not that old (yet) and I do like programming.
+
+    p I'm an IT guy, I've #[a(href='https://nl.linkedin.com/in/martijncasteel') studied] Computer Science and Technical Artificial Intelligence. The latter is kinda long and I have to explain it every time, so the short version is I'm building Jarvis and Sonny.
+
+    p I like watching movies amongst many other hobbies you may, or may not, find out reading my blog! If the white hurts your eyes press #[kbd ctrl] + #[kbd i] and lets stretch those fingers a bit.
+
+  hr
+
+  each post in posts
+    include post
+
+    hr
