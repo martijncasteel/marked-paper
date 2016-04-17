@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  article
+    h1= post.title
+
+    span.created= post.date
+    span.additional= post.additional
+
+    != content
+
+    hr

@@ -2,7 +2,7 @@ extends layout
 
 block content
   article
-    h2 What is it about?
+    h1 What is it about?
 
     p Well about me, #[strong Martijn Casteel], at easy as that!
 
@@ -15,6 +15,13 @@ block content
   hr
 
   each post in posts
-    include post
+    article
+      a(href= '/#{post.file}')
+        h1= post.title
 
-    hr
+      span.created= post.date
+      span.additional= post.additional
+
+      != post.content
+
+      hr

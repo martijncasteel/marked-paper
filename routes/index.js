@@ -5,20 +5,35 @@ var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  fs.readdir('./cache', function(err, items) {
+  var json = JSON.parse(process.env.posts).slice(-3, 3);
 
-    res.render('index', {
-      posts: items.filter(function(item){
+  var posts = json.reverse().map(function(item){
 
-        // only html files
-        return item.indexOf('.html')>=0
-      }).map(function(item){
+    // include html for each
+    item.content = fs.readFileSync('./.cache/' + item.file, 'utf8');
+  });
 
-        //append path to each
-        return '../cache/' + item
-      })
-    });
+  res.render('index', {
+    posts: json
+  });
+});
 
+router.get(/\/([a-z\-]+).html/, function(req, res, next) {
+
+  var post = JSON.parse(process.env.posts).filter(function(item) {
+    return item.file == req.params[0] + '.html'
+  });
+
+  if(post.length < 1) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+    return
+  }
+
+  res.render('post', {
+    post: post[0],
+    content: fs.readFileSync('./.cache/' + post[0].file, 'utf8')
   });
 });
 

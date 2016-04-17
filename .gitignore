@@ -24,12 +24,11 @@ build/Release
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
-/bin
 /node_modules
 
 # Debug log from npm
 npm-debug.log
 
 # Cache for html pages
-!.keep
-/cache
+/.cache
+!/.cache/.posts

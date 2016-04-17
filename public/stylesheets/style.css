@@ -5,12 +5,102 @@ body {
   font-family: Merriweather, serif;
 }
 
+/* Resize all headers to two steps smaller, hence with markdown it is easier to use one # */
+h1 {
+  font-size: 3.0rem;
+  line-height: 1.3;
+  letter-spacing: -.1rem;
+  color: #333;
+}
+
+h2 {
+  font-size: 2.4rem;
+  line-height: 1.35;
+  letter-spacing: -.08rem;
+  color: #333;
+}
+
+h3 {
+  font-size: 1.8rem;
+  line-height: 1.5;
+  letter-spacing: -.05rem;
+  color: #444;
+}
+
+h4 {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+  color: #444;
+}
+
+/* Larger than phablet */
+@media (min-width: 550px) {
+  h1 {
+    font-size: 3.6rem;
+  }
+
+  h2 {
+    font-size: 3.0rem;
+  }
+
+  h3 {
+    font-size: 2.4rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
+/* custom styles */
 .container {
   max-width: 600px;
 }
 
+a.profile {
+  display: block;
+  height: 80px;
+  width: 80px;
+
+  border-radius: 50%;
+  overflow: hidden;
+
+  background-color: #fbfbfb;
+
+  border: 1px solid #ebebeb;
+  padding: 5px;
+  margin: 30px auto 0;
+}
+
+a.profile:before, a.profile:after {
+  content: '';
+  display: block;
+
+  position: absolute;
+  left: 0px;
+  top: 45px;
+
+  height: 1px;
+  width: calc(50% - 80px);
+
+  background-color: #E1E1E1;
+}
+
+a.profile:after {
+  left: auto;
+  right: 0px;
+}
+
+a.profile img {
+  height: 100%;
+  width: 100%;
+
+  border-radius: 50%;
+}
+
 article:first-of-type {
-  margin-top: 100px;
+  margin-top: 30px;
 }
 
 article span.created, article span.additional {
@@ -26,10 +116,26 @@ article span.additional::before {
   margin: 0 5px;
 }
 
+article a {
+  color: #333;
+}
+
+article a:hover {
+  color: #333;
+}
+
+article > a:first-of-type {
+  text-decoration: none;
+}
+
 article a.button {
   height: 30px;
   padding: 0 20px;
 
   line-height: 30px;
   font-size: 9px;
+}
+
+article img {
+  max-width: 100%;
 }
