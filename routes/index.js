@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   var posts = json.reverse().map(function(item){
 
     // include html for each
-    item.content = fs.readFileSync('./.cache/' + item.file, 'utf8');
+    item.content = fs.readFileSync('./.cache/' + item.file + '.html', 'utf8');
   });
 
   res.render('index', {
@@ -18,10 +18,10 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get(/\/([a-z\-]+).html/, function(req, res, next) {
+router.get(/\/([a-z\-]+)\/?$/, function(req, res, next) {
 
   var post = JSON.parse(process.env.posts).filter(function(item) {
-    return item.file == req.params[0] + '.html'
+    return item.file == req.params[0]
   });
 
   if(post.length < 1) {
@@ -33,7 +33,7 @@ router.get(/\/([a-z\-]+).html/, function(req, res, next) {
 
   res.render('post', {
     post: post[0],
-    content: fs.readFileSync('./.cache/' + post[0].file, 'utf8')
+    content: fs.readFileSync('./.cache/' + post[0].file + '.html', 'utf8')
   });
 });
 

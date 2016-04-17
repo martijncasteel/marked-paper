@@ -2,11 +2,17 @@ doctype html
 html
   head
     title Martijn Casteel
+
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(charset='utf-8')
+
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Merriweather:400,300,700')
 
+    script(src='https://code.jquery.com/jquery-2.2.3.min.js', integrity='sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=', crossorigin='anonymous', async)
+
   body.container
     a(href='/').profile
-      img(src='images/profile.jpg')
+      img(src='/images/profile.jpg')
 
     block content

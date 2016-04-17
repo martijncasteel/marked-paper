@@ -5,7 +5,9 @@ block content
     h1= post.title
 
     span.created= post.date
-    span.additional= post.additional
+
+    if post.additional
+      span.additional= post.additional
 
     != content
 

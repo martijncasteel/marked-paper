@@ -9,8 +9,10 @@ function post( markdown ) {
   if(file == null)
     return
 
+  console.log( 'create ' + markdown)
+
   fs.readFile( markdown, 'utf8', function(err, data) {
-    var object = data.split(/\-{3}[\r|\n]/)
+    var object = data.split(/\-{2,3}[\r|\n]/)
 
     if(object[0] === undefined || object[1] === undefined)
       return false;
@@ -38,8 +40,10 @@ post.update = function( markdown ) {
   if(file == null)
     return
 
+  console.log( 'update ' + markdown)
+
   fs.readFile( markdown, 'utf8', function(err, data) {
-    var object = data.split(/\-{3}[\r|\n]/)
+    var object = data.split(/\-{2,3}[\r|\n]/)
 
     if(object[0] === undefined || object[1] === undefined)
       return false;
@@ -50,7 +54,7 @@ post.update = function( markdown ) {
       // update json file
       var list = JSON.parse(process.env.posts)
       var index = list.findIndex(function( item ) {
-        if( item.file == file[1] + '.html' )
+        if( item.file == file[1] )
           return true;
         return false;
       })
@@ -75,10 +79,12 @@ post.delete = function( markdown ) {
   if(file == null)
     return
 
+  console.log( 'delete ' + markdown)
+
   // update json file
   var list = JSON.parse(process.env.posts)
   var index = list.findIndex(function( item ) {
-    if( item.file == file[1] + '.html' )
+    if( item.file == file[1] )
       return true;
     return false;
   })
@@ -86,7 +92,7 @@ post.delete = function( markdown ) {
   if(index < 0)
     return
 
-  fs.unlink('./.cache/' + file + '.html', function( err ) {
+  fs.unlink('./.cache/' + file[1] + '.html', function( err ) {
     list.splice(index, 1)
 
     process.env.posts = JSON.stringify(list)
@@ -101,7 +107,7 @@ post.delete = function( markdown ) {
 /* function for parsing the markdown file */
 post._json = function( file, text ) {
   var obj = {
-    'file': file + '.html'
+    'file': file
   }
 
   text.split(/\r|\n/).forEach(function(item) {
