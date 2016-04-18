@@ -1,6 +1,6 @@
 {
   "name": "marked-paper",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Minimalistic markdown blog using nodejs",
   "private": true,
   "keywords": [
