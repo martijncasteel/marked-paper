@@ -11,7 +11,6 @@ var routes = require('./routes/index');
 var api = require('./routes/api');
 
 var app = express();
-
 process.env.posts = fs.readFileSync('./.cache/.posts', 'utf8');
 
 // view engine setup
