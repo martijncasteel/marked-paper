@@ -13,6 +13,6 @@ additional: Utrecht, the Netherlands
 Lorem ipsum dolar set amit
 ```
 
-A changed `.md` file or created `.md` within the posts directory (containing at least the `---` will be parsed into html and the header will be added to the `.posts` file. Than the website will render this post, a new post will always be added last, so if you want to change the order, you'll have to do so in the `.posts`.
+A changed `.md` file or created `.md` within the posts directory (containing at least the `---` will be [parsed](https://github.com/chjj/marked) into html and the header will be added to the `.posts` file. Than the website will render this post, a new post will always be added last, so if you want to change the order, you'll have to do so in the `.posts`.
 
 Jade cannot include files dynamically, the html is read into a variable in the controller and passed as string to the template. I do not have noticed significantly changes in response time but this might affect it using large blogposts. I started this project to find out how nodejs worked and find some tricky parts of it but I like thejavascript idea behind it. It will still be easier to build a blog using php, but less fun!
