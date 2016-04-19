@@ -61,6 +61,14 @@ h1, h2 {
   }
 }
 
+.center {
+  text-align: center;
+}
+
+h1.center {
+  margin-top: 60px;
+}
+
 a.profile {
   display: block;
   height: 80px;
@@ -147,10 +155,6 @@ article a.button {
 
   line-height: 30px;
   font-size: 9px;
-}
-
-article pre > code {
-  width: 100%;
 }
 
 article img {
