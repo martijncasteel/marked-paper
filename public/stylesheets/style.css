@@ -149,6 +149,10 @@ article a.button {
   font-size: 9px;
 }
 
+article pre > code {
+  width: 100%;
+}
+
 article img {
   max-width: 100%;
 }
