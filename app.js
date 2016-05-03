@@ -11,7 +11,6 @@ var routes = require('./routes/index');
 var api = require('./routes/api');
 
 var app = express();
-
 process.env.posts = fs.readFileSync('./.cache/.posts', 'utf8');
 
 // view engine setup
@@ -45,6 +44,7 @@ if (app.get('env') === 'development') {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
+      status: err.status,
       error: err
     });
   });
@@ -56,6 +56,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
+    status: err.status,
     error: {}
   });
 });

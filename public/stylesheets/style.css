@@ -61,6 +61,14 @@ h1, h2 {
   }
 }
 
+.center {
+  text-align: center;
+}
+
+h1.center {
+  margin-top: 60px;
+}
+
 a.profile {
   display: block;
   height: 80px;
