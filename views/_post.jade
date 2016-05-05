@@ -1,0 +1,12 @@
+article(data-title= '#{post.file}')
+  a(href= '/#{post.file}')
+    h1= post.title
+
+    span.created= post.date
+
+    if post.additional
+      span.additional= post.additional
+
+    != content
+
+    hr
