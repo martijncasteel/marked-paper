@@ -16,6 +16,7 @@ process.env.posts = fs.readFileSync('./.cache/.posts', 'utf8');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set('x-powered-by', 'false');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
