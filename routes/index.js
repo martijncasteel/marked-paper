@@ -5,10 +5,9 @@ var fs = require('fs');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var json = JSON.parse(process.env.posts).slice(-2, 2);
+  var json = JSON.parse(process.env.posts).slice(-2);
 
   var posts = json.reverse().map(function(item){
-
     // include html for each
     item.content = fs.readFileSync('./.cache/' + item.file + '.html', 'utf8');
   });
