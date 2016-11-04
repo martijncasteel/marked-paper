@@ -30,4 +30,4 @@ build/Release
 npm-debug.log
 
 # Cache for html pages
-.cache/*
+.cache
