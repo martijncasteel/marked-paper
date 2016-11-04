@@ -1,4 +1,5 @@
 # `marked-paper`
+[![Build Status](https://travis-ci.org/martijncasteel/marked-paper.svg?branch=master)](https://travis-ci.org/martijncasteel/marked-paper)
 
 `Marked-paper` is a minimalistic markdown blog using javascript. As for now only the back-end is implemented and I have yet to start on the client side javascript. This blog has no obstructing or ugly buttons and pagers, therefore some javascript has to be implemented to load more posts once scrolling down.
 
