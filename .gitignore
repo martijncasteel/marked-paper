@@ -14,7 +14,7 @@ lib-cov
 coverage
 
 # File with token from github
-secrets.js
+/secrets.js
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
