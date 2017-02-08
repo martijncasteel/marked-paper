@@ -15,10 +15,10 @@ router.post('/push', function(req, res, next) {
     var child = spawn('./pull.sh');
 
     child.stdout.on('data', (data) => {
-      res.json({
+      res.status(201).json({
         "hub-delivery": req.headers["x-github-delivery"],
         "hub-event": req.headers["x-github-event"],
-        "response": 'data.toString()',
+        "response": data.toString(),
 
         "commit": req.body.after,
         "messages": req.body.commits
