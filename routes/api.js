@@ -9,7 +9,7 @@ router.post('/push', function(req, res, next) {
 
   var hash = crypto.createHmac("sha1", secrets.github_token).update(payload).digest("hex");
 
-  if (req.headers['X-Hub-Signature'] === "sha1=" + hash){
+  if (req.headers["x-hub-signature"] === "sha1=" + hash){
 
     var spawn = require('child_process').spawn;
     var child = spawn('./pull.sh');
