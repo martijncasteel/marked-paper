@@ -4,7 +4,7 @@ additional: Choo choo!
 
 ---
 
-Study association [Sticky](https://svsticky.nl) is based in Utrecht and is for all IT students on the Utrecht University. Within the association there was a member registration application build in PHP, however, that one started to fall apart. PHP is a language that is great for creating simple applications such as a blog or whatever not too complex, for a larger application with a complex database you would want to at least use a framework.
+Study association [Sticky](https://www.svsticky.nl) is based in Utrecht and is for all IT students on the Utrecht University. Within the association there was a member registration application build in PHP, however, that one started to fall apart. PHP is a language that is great for creating simple applications such as a blog or whatever not too complex, for a larger application with a complex database you would want to at least use a framework.
 
 For the new member registration application together with a few we started to build it in Rails, hence the _laying some tracks_, you get it?! I always try out new languages to find out what works for me. Within Rails the Model-View-Controller paradigm is enforced, it is developed for large applications with complex databases, didn't I mention this earlier? 
 
