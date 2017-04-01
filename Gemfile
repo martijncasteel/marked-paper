@@ -5,6 +5,5 @@ gem 'middleman-blog'
 gem 'middleman-autoprefixer'
 
 gem 'haml'
-
-gem 'github-markup'
-gem 'commonmarker'
+gem 'redcarpet'
+gem 'builder'

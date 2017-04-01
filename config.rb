@@ -2,7 +2,10 @@
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
 
 activate :blog do |blog|
+  blog.sources = 'posts/{title}.html'
+  blog.permalink = '{title}.html'
 
+  blog.layout = 'post'
 end
 
 activate :directory_indexes
@@ -16,15 +19,13 @@ end
 page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
+page '/feed.xml', layout: false
 
 # With alternative layout
 # page '/path/to/file.html', layout: 'other_layout'
 
 # Proxy pages
 # https://middlemanapp.com/advanced/dynamic-pages/
-['tom', 'dick', 'harry'].each do |name|
-  proxy "/#{name}", '/post.html.haml', :locals => { :name => name }
-end
 
 # Helpers
 # Methods defined in the helpers block are available in templates
@@ -40,7 +41,7 @@ end
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
 configure :build do
-  ignore '/post.html.haml'
+  ignore 'post.html.haml'
 
   activate :minify_css
   activate :minify_javascript
