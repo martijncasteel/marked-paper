@@ -1,2 +1,2 @@
 # This is where it all goes :)
-import 'turbolinks.js'
+# TODO gulp? require 'turbolinks.js'

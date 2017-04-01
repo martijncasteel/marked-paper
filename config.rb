@@ -21,9 +21,6 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 page '/feed.xml', layout: false
 
-# With alternative layout
-# page '/path/to/file.html', layout: 'other_layout'
-
 # Proxy pages
 # https://middlemanapp.com/advanced/dynamic-pages/
 
@@ -42,6 +39,8 @@ page '/feed.xml', layout: false
 
 configure :build do
   ignore 'post.html.haml'
+
+  activate :gzip
 
   activate :minify_css
   activate :minify_javascript
