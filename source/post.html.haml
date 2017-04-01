@@ -1,0 +1,10 @@
+%article
+  %h1= current_page.title
+  %span.created= current_page.date
+
+  - if current_page.additional
+    %span.additional= current_page.additional
+
+  lipsum
+
+  %hr

@@ -8,7 +8,11 @@
 
     %title= current_page.data.title || 'Martijn Casteel'
 
-    = stylesheet_link_tag 'stylesheet'
-    = javascript_include_tag 'javascript'
-  %body
-    = yield
+    = stylesheet_link_tag 'style'
+    = javascript_include_tag 'script'
+
+  %body.container
+    %a.profile{ :href => '/' }
+      %img{ :alt => 'profile', :src => '/images/profile.jpg' }
+
+    ~ yield
