@@ -5,11 +5,11 @@ rvm:
 
 env:
   global:
-  - FOLDER="/tmp/middleman"
-  - HOST="martijncasteel.com"
+  - FOLDER='/tmp/middleman'
+  - HOST='martijncasteel.com'
 
 addons:
-  ssh_known_hosts: "martijncasteel.com"
+  ssh_known_hosts: 'martijncasteel.com'
 
 script: bundle exec middleman build
 
@@ -22,6 +22,6 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: script
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build $USER@$HOST:$FOLDER
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build/* $USER@$HOST:$FOLDER
   on:
     branch: master
