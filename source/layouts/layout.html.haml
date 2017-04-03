@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %meta{ :content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
+    %meta{ :charset => 'utf-8' }
+
+    %meta{ :content => 'ie=edge', 'http-equiv' => 'x-ua-compatible' }
+    %meta{ :content => 'width=device-width, initial-scale=1, shrink-to-fit=no', :name => 'viewport' }
+
+    = favicon_tag '/images/favicon.ico'
+
+    %meta{ :content => 'Well about me, Martijn Casteel, at easy as that! A lone writer, writing about some thrilling encounters mainly in IT. First exciting point to elaborate; Who am I?', :name => 'description' }
+
+    %title Martijn Casteel
+    = feed_tag :atom, 'feed.xml'
+    = stylesheet_link_tag 'style'
+
+  %body.container
+    = link_to '/', :class => 'profile' do
+      %img{ :alt => 'profile', :src => '/images/profile.jpg' }
+
+    ~ yield
+
+    - blog.articles[0..1].each do |article|
+      %article
+
+        = link_to article.url do
+          %h1= article.title
+
+        %span.created= article.date.strftime('%e %B %Y')
+
+        - if article.data.additional
+          %span.additional= article.data.additional
+
+        ~ article.body
+
+        %hr
+
+    = javascript_include_tag 'app'
+    = javascript_include_tag 'turbolinks.js'
