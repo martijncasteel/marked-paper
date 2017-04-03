@@ -23,7 +23,9 @@
       %img{ :alt => 'profile', :src => '/images/profile.jpg' }
 
     %article
-      %h1= current_page.title
+      = link_to current_page.url do
+        %h1= current_page.title
+
       %span.created= current_page.date.strftime('%e %B %Y')
 
       - if current_page.data.additional
@@ -33,5 +35,4 @@
 
       %hr
 
-    = javascript_include_tag 'app'
-    = javascript_include_tag 'turbolinks.js'
+    = partial 'footer'

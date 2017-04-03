@@ -9,6 +9,7 @@ activate :blog do |blog|
 end
 
 activate :directory_indexes
+set :trailing_slash, false
 
 activate :autoprefixer do |prefix|
   prefix.browsers = 'last 2 versions'

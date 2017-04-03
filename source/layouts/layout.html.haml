@@ -22,7 +22,7 @@
     ~ yield
 
     - blog.articles[0..1].each do |article|
-      %article
+      %article{ 'data-url' => article.url }
 
         = link_to article.url do
           %h1= article.title
@@ -36,5 +36,7 @@
 
         %hr
 
-    = javascript_include_tag 'app'
-    = javascript_include_tag 'turbolinks.js'
+    - blog.articles.drop(2).each do |article|
+      %article{ 'data-url' => article.url }
+
+    = partial 'footer'
