@@ -22,6 +22,6 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: script
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build/ $USER@$HOST:$FOLDER
+  script: rsync -r --delete-after --chown=www-data:www-data --quiet $TRAVIS_BUILD_DIR/build/ $USER@$HOST:$FOLDER
   on:
     branch: master
