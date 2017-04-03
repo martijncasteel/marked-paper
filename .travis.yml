@@ -5,7 +5,7 @@ rvm:
 
 env:
   global:
-  - FOLDER='/tmp/middleman'
+  - FOLDER='/var/www/martijncasteel.nl'
   - HOST='martijncasteel.com'
 
 addons:
