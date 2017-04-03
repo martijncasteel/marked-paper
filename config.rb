@@ -38,8 +38,6 @@ page '/feed.xml', layout: false
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
 configure :build do
-  ignore 'post.html.haml'
-
   activate :gzip
 
   activate :minify_css

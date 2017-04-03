@@ -1,0 +1,24 @@
+---
+language: ruby
+cache: bundler
+
+rvm:
+- 2.4.0
+
+env:
+  global:
+    # - FOLDER="/var/www/martijncasteel.nl"
+    - FOLDER="/tmp/middleman/build"
+    - HOST="martijncasteel.com"
+
+addons:
+  ssh_known_hosts: $HOST
+
+script: bundle exec middleman build
+
+# deploy:
+#   skip_cleanup: true
+#   provider: script
+#   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build $USER@$HOST:$FOLDER # <ssh-user>@<deploy-host>:path/to/files
+#   on:
+#     branch: master

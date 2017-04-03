@@ -8,6 +8,10 @@ body {
   font-family: Merriweather, serif;
 }
 
+::selection {
+  background: #ffa93a;
+}
+
 h1 {
   font-size: 3.0rem;
   line-height: 1.3;
