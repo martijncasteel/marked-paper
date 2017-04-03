@@ -9,7 +9,7 @@ env:
   - HOST="martijncasteel.com"
 
 addons:
-  ssh_known_hosts: "$HOST"
+  ssh_known_hosts: $HOST
 
 script: bundle exec middleman build
 
