@@ -3,24 +3,24 @@ cache: bundler
 rvm:
 - 2.4.0
 
-# env:
-#   global:
-#   - FOLDER="/tmp/middleman/build"
-#   - HOST="martijncasteel.com"
-#
-# addons:
-  # ssh_known_hosts: "$HOST"
+env:
+  global:
+  - FOLDER="/tmp/middleman"
+  - HOST="martijncasteel.com"
+
+addons:
+  ssh_known_hosts: "$HOST"
 
 script: bundle exec middleman build
 
-# before_deploy:
-# - openssl aes-256-cbc -K $encrypted_7eeb48b5fe61_key -iv $encrypted_7eeb48b5fe61_iv -in deploy-key.enc -out ~/.ssh/id_rsa -d
-# - chmod 600 ~/.ssh/id_rsa*
-# - eval `ssh-agent -s`
-# - ssh-add ~/.ssh/id_rsa
-#
-# deploy:
-#   provider: script
-#   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build $USER@$HOST:$FOLDER
-#   on:
-#     branch: master
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_7eeb48b5fe61_key -iv $encrypted_7eeb48b5fe61_iv -in deploy-key.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+- eval `ssh-agent -s`
+- ssh-add ~/.ssh/id_rsa
+
+deploy:
+  provider: script
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build $USER@$HOST:$FOLDER
+  on:
+    branch: master
