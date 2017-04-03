@@ -20,6 +20,7 @@ before_deploy:
 - ssh-add ~/.ssh/id_rsa
 
 deploy:
+  skip_cleanup: true
   provider: script
   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/build $USER@$HOST:$FOLDER
   on:
