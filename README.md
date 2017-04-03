@@ -3,7 +3,7 @@
 
 `Marked-paper` is a minimalistic markdown blog using middleman. My blog has no obstructing or ugly buttons and pagers, therefore some javascript has to be implemented to load more posts once scrolling down.
 
-The back-end is made using [`middleman`](https://middlemanapp.com/) build on `ruby` and the idea behind it was to create a simple blogging platform for one user familiar with markdown. A typical blog file is formatted using a header with some required parameters; title and date.
+The back-end is made using [`middleman`](https://middlemanapp.com/) build on [`ruby`](https://www.ruby-lang.org/en/) and the idea behind it was to create a simple blogging platform for one user familiar with markdown. A typical blog file is formatted using a header with some required parameters; title and date.
 
 ```markdown
 ---

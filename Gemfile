@@ -7,3 +7,7 @@ gem 'middleman-autoprefixer'
 gem 'haml'
 gem 'redcarpet'
 gem 'builder'
+
+group :test do
+  gem 'rake'
+end
