@@ -8,7 +8,14 @@ Study association [Sticky](https://www.svsticky.nl) is based in Utrecht and is f
 
 For the new member registration application together with a few we started to build it in Rails, hence the _laying some tracks_, you get it?! I always try out new languages to find out what works for me. Within Rails the Model-View-Controller paradigm is enforced, it is developed for large applications with complex databases, didn't I mention this earlier?
 
-![members]
+<div class='image-slider'>
+  <figure class='four-images'>
+    <img src='/laying-some-track/login.png' alt='login'>
+    <img src='/laying-some-track/members.png' alt='login'>
+    <img src='/laying-some-track/activities.png' alt='login'>
+    <img src='/laying-some-track/login.png' alt='login'>
+  </figure>
+</div>
 
 Building a Rails application is quite easy, I would really recommend reading the [getting started](http://guides.rubyonrails.org/getting_started.html) guide and creating the simple blog, Ruby is easy, it is well documented and readable, one of the easiest languages I have done in a while. Just start programming, as long as your database design is solid improvements can always be done. There are some awesome libraries, so called gems, for Rails such as; [haml], [rabl], [devise], and [paperclip], and probably a few more.
 

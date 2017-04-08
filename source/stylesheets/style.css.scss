@@ -166,3 +166,74 @@ article {
 .hide {
   display: none;
 }
+
+
+@mixin image-slider($images) {
+  position: relative;
+  width: 100% * $images;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: 0;
+  text-align: left;
+
+  // &:hover {
+  //   -webkit-animation-play-state: paused;
+  //   animation-play-state: paused;
+  // }
+
+  animation: 6s * $images animation-#{$images} infinite;
+
+  > img {
+    width: 100% / $images;
+    height: auto;
+    float: left;
+  }
+}
+
+@for $images from 3 through 4 {
+  @keyframes animation-#{$images} {
+
+    $animation-length: 5%;
+    $frame-length: (100% - $animation-length) / ($images - 1);
+
+    0% {
+      left: 0%;
+    }
+
+    @for $i from 1 through ($images - 1) {
+      #{$frame-length * $i} {
+        left: #{-100% * ($i - 1)};
+      }
+      #{$frame-length * $i + $animation-length} {
+        left: #{-100% * $i};
+      }
+    }
+  }
+}
+
+
+.image-slider {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+
+  > figure {
+    position: relative;
+
+    margin: 0;
+    padding: 0;
+
+    font-size: 0;
+    text-align: left;
+
+    &.three-images {
+      @include image-slider(3);
+    }
+
+    &.four-images {
+      @include image-slider(4);
+    }
+  }
+}
