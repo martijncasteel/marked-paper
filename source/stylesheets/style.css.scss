@@ -178,11 +178,6 @@ article {
   font-size: 0;
   text-align: left;
 
-  // &:hover {
-  //   -webkit-animation-play-state: paused;
-  //   animation-play-state: paused;
-  // }
-
   animation: 6s * $images animation-#{$images} infinite;
 
   > img {
