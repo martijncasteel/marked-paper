@@ -1,10 +1,8 @@
 # Activate and configure extensions
 # https://middlemanapp.com/advanced/configuration/#configuring-extensions
-
 activate :blog do |blog|
   blog.sources = 'posts/{title}.html'
   blog.permalink = '{title}.html'
-
   blog.layout = 'post'
 end
 
@@ -22,22 +20,17 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 page '/feed.xml', layout: false
 
-# Proxy pages
-# https://middlemanapp.com/advanced/dynamic-pages/
-
-# Helpers
-# Methods defined in the helpers block are available in templates
-# https://middlemanapp.com/basics/helper-methods/
-
-# helpers do
-#   def some_helper
-#     'Helping'
-#   end
-# end
+# Set default markdown engine for code highlighting
+# https://github.com/middleman/middleman-syntax
+set :markdown_engine, :redcarpet
+set :markdown, :fenced_code_blocks => true, :smartypants => true
+activate :syntax do |syntax|
+  syntax.inline_theme = Rouge::Themes::Github.new
+  syntax.line_numbers = true
+end
 
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
-
 configure :build do
   activate :gzip
 
