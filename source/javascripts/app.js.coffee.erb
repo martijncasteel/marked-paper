@@ -17,7 +17,7 @@ ga 'create', '<%= ENV['ga_tracking_code'] %>', 'auto'
 
 
 # send another hit on partial load of turbolinks
-$(window).on 'turbolinks:load', (event) ->
+document.addEventListener 'turbolinks:load', (event) ->
   console.log(event.data.url)
 
   if typeof ga is 'function'
