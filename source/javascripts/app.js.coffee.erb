@@ -1,0 +1,57 @@
+# This is where it all goes :)
+((i, s, o, g, r, a, m) ->
+  i['GoogleAnalyticsObject'] = r
+  i[r] = i[r] or ->
+    (i[r].q = i[r].q or []).push arguments
+    return
+
+  i[r].l = 1 * new Date
+  a = s.createElement(o)
+  m = s.getElementsByTagName(o)[0]
+  a.async = 1
+  a.src = g
+  m.parentNode.insertBefore a, m
+  return
+) window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga'
+ga 'create', '<%= ENV['ga_tracking_code'] %>', 'auto'
+
+
+# send another hit on partial load of turbolinks
+$(window).on 'turbolinks:load', (event) ->
+  console.log(event.data.url)
+
+  if typeof ga is 'function'
+    ga('set', 'location', event.data.url)
+    ga('send', 'pageview')
+
+
+$(window).on 'scroll', ->
+  offset = $(window).height() + $(window).scrollTop()
+  if offset < $(document).height() - 300
+    return
+
+  if $('body').attr( 'loading' ) != undefined
+    return
+
+  # retrieve last url
+  o = $('article:not(:has(*)):first')
+  url = $(o).attr 'data-url'
+
+  if url == undefined
+    $(window).off 'scroll'
+    return
+
+  # add state to wait for xhr
+  $('body').attr 'loading', ''
+
+  # retrieve article
+  $.get(url, (data) ->
+    $(o).html( $(data).filter('article').html())
+    $('body').removeAttr 'loading'
+    return
+
+  ).fail ->
+    $(window).off 'scroll'
+    return
+
+  return
