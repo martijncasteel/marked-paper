@@ -18,7 +18,6 @@ end
 page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
-page '/feed.xml', layout: false
 
 # Set default markdown engine for code highlighting
 # https://github.com/middleman/middleman-syntax
