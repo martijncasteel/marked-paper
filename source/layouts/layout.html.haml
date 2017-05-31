@@ -1,5 +1,5 @@
 !!!
-%html
+%html{ 'lang' => 'en' }
   %head
     = partial 'header'
 
@@ -13,7 +13,7 @@
       %article{ 'data-url' => article.url }
 
         = link_to article.url do
-          %h1= article.title
+          %h2= article.title
 
         %span.created= article.date.strftime('%e %B %Y')
 

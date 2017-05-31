@@ -1,5 +1,5 @@
 !!!
-%html
+%html{ 'lang' => 'en' }
   %head
     = partial 'header', :locals => { :title => current_page.data.title }
 
@@ -9,7 +9,7 @@
 
     %article
       = link_to current_page.url do
-        %h1= current_page.title
+        %h2= current_page.title
 
       %span.created= current_page.date.strftime('%e %B %Y')
 
