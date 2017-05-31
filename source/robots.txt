@@ -1,0 +1,7 @@
+User-agent: *
+
+Allow: /
+Disallow: /stylesheets/
+Disallow: /javascripts/
+
+Sitemap: https://martijncasteel.com/sitemap.xml
