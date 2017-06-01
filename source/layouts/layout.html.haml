@@ -3,6 +3,10 @@
   %head
     = partial 'header'
 
+    %meta{ :property => 'og:title', :content => 'Martijn Casteel' }
+    %meta{ :property => 'og:image', :content => '/images/profile.jpg' }
+    %meta{ :property => 'og:type', :content => 'website' }
+
   %body.container
     = link_to '/', :class => 'profile' do
       %img{ :alt => 'profile', :src => '/images/profile.jpg' }
@@ -27,4 +31,4 @@
     - blog.articles.drop(2).each do |article|
       %article{ 'data-url' => article.url }
 
-= partial 'footer'
+    = partial 'footer'

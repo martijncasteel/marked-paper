@@ -3,13 +3,20 @@
   %head
     = partial 'header', :locals => { :title => current_page.data.title }
 
+    %meta{ :property => 'og:title', :content => current_page.title }
+    %meta{ :property => 'og:image', :content => '/images/profile.jpg' }
+    %meta{ :property => 'og:type', :content => 'article' }
+
+    %meta{ :property => 'og:article:author', :content => 'Martijn Casteel' }
+    %meta{ :property => 'og:article:published_time', :content => current_page.date.to_time }
+
   %body.container
     = link_to '/', :class => 'profile' do
       %img{ :alt => 'profile', :src => '/images/profile.jpg' }
 
     %article
       = link_to current_page.url do
-        %h2= current_page.title
+        %h1= current_page.title
 
       %span.created= current_page.date.strftime('%e %B %Y')
 
@@ -20,4 +27,4 @@
 
       %hr
 
-= partial 'footer'
+    = partial 'footer'
