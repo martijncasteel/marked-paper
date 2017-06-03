@@ -27,7 +27,7 @@ location ~* \.(?:css|js)$ {
 }
 ```
 
-Finally I added my website and sitemap to Google webmasters and wait for it to be crawled. In the end of the day, those good numbers from [nibbler](nibbler) doesn't mean a lot to your visitors. Content is the way to go (and some references won't hurt either).
+Finally I added my website and sitemap to Google webmasters and wait for it to be crawled. In the end of the day, those good numbers from nibbler doesn't mean a lot to your visitors. Content is the way to go (and some references won't hurt either).
 
 [github]: https://martijncasteel.com
 [nibbler]: http://nibbler.silktide.com/en_US/reports/martijncasteel.com

@@ -23,6 +23,7 @@ page '/*.txt', layout: false
 # https://github.com/middleman/middleman-syntax
 set :markdown_engine, :redcarpet
 set :markdown, :fenced_code_blocks => true, :smartypants => true
+
 activate :syntax do |syntax|
   syntax.inline_theme = Rouge::Themes::Github.new
   syntax.line_numbers = true
