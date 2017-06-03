@@ -146,12 +146,6 @@ article {
     &:hover {
       color: #333;
     }
-    &.button {
-      height: 30px;
-      padding: 0 20px;
-      line-height: 30px;
-      font-size: 9px;
-    }
   }
   > a:first-of-type {
     text-decoration: none;
@@ -212,6 +206,7 @@ a.back {
   }
 }
 
+// image slider
 
 @mixin image-slider($images) {
   position: relative;
@@ -274,5 +269,51 @@ a.back {
     &.four-images {
       @include image-slider(4);
     }
+  }
+}
+
+// print style
+@media print {
+  @page {
+    size: A4;
+  }
+
+  body, h1, h2 {
+      background: #fff;
+      color: #000;
+  }
+
+  p {
+    font-size: 13pt;
+  }
+
+  article:not(:first-child) {
+    page-break-before: always;
+    padding-top: 30px;
+  }
+
+  a.profile {
+    display: none;
+  }
+
+  div.image-slider {
+    overflow: visible;
+
+    > figure {
+      animation: none;
+      width: 100%;
+
+      img {
+        clear: both;
+        width: 100%;
+        margin: 20px 0;
+      }
+    }
+  }
+
+  a[href^='http://']:after, a[href^='https://']:after {
+    color: #1EAEDB;
+    text-decoration: none !important;
+    content: " (" attr(href) ")";
   }
 }
