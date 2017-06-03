@@ -12,6 +12,7 @@ For the new member registration application together with a few we started to bu
   <video autoplay playsinline muted loop poster='/laying-some-track/login.png'>
     <source src='/laying-some-track/constipated-koala.mp4' type='video/mp4' />
     <img src='/laying-some-track/login.png' alt='login' />
+    <span>Muted video of constipated-koala showing some basic features</span>
   </video>
 </a>
 
