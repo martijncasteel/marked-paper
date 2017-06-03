@@ -1,8 +1,8 @@
 dist: trusty
 sudo: false
-
 language: ruby
 cache: bundler
+
 rvm:
 - 2.4.0
 
@@ -12,7 +12,7 @@ env:
   - HOST='martijncasteel.com'
 
 addons:
-  ssh_known_hosts: 'martijncasteel.com'
+  ssh_known_hosts: martijncasteel.com
 
 script: bundle exec middleman build
 

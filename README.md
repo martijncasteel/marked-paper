@@ -1,5 +1,6 @@
 # `marked-paper`
 [![Build Status](https://travis-ci.org/martijncasteel/marked-paper.svg?branch=master)](https://travis-ci.org/martijncasteel/marked-paper)
+[![Middleman version](https://img.shields.io/badge/middleman-v4.2.1-blue.svg)](https://img.shields.io/badge/middleman-v4.2.1-blue.svg)
 
 `Marked-paper` is a minimalistic markdown blog using middleman. My blog has no obstructing or ugly buttons and pagers, therefore some javascript has to be implemented to load more posts once scrolling down.
 
