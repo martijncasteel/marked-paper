@@ -123,6 +123,7 @@ article {
   &:first-of-type {
     margin-top: 30px;
   }
+
   span {
     &.created {
       font-size: 0.8em;
@@ -130,6 +131,7 @@ article {
       display: inline-block;
       padding-bottom: 10px;
     }
+
     &.additional {
       font-size: 0.8em;
       color: gray;
@@ -141,15 +143,18 @@ article {
       }
     }
   }
+
   a {
     color: #333;
     &:hover {
       color: #333;
     }
   }
+
   > a:first-of-type {
     text-decoration: none;
   }
+
   img, video {
     max-width: 100%;
   }
@@ -162,6 +167,7 @@ article {
 pre.highlight {
   > code {
     white-space: normal;
+    display: inline-block;
 
     > table.rouge-table {
       margin: 0px;
