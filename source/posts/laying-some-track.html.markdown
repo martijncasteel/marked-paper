@@ -8,7 +8,7 @@ Study association [Sticky](https://www.svsticky.nl) is based in Utrecht and is f
 
 For the new member registration application together with a few we started to build it in Rails, hence the _laying some tracks_, you get it?! I always try out new languages to find out what works for me. Within Rails the Model-View-Controller paradigm is enforced, it is developed for large applications with complex databases, didn't I mention this earlier?
 
-<a href='/laying-some-track/constipated-koala.mp4' alt='constipated-koala'>
+<a href='/laying-some-track/constipated-koala.mp4'>
   <video autoplay='autoplay' loop='loop' poster='/laying-some-track/login.png' alt='constipated-koala'>
     <source src='/laying-some-track/constipated-koala.mp4' type='video/mp4' />
     <img src='/laying-some-track/login.png' alt='login' />
