@@ -6,25 +6,4 @@ cache: bundler
 rvm:
 - 2.4.0
 
-env:
-  global:
-  - FOLDER='/var/www/martijncasteel.nl'
-  - HOST='martijncasteel.com'
-
-addons:
-  ssh_known_hosts: martijncasteel.com
-
 script: bundle exec middleman build
-
-before_deploy:
-- openssl aes-256-cbc -K $encrypted_7eeb48b5fe61_key -iv $encrypted_7eeb48b5fe61_iv -in deploy-key.enc -out ~/.ssh/id_rsa -d
-- chmod 600 ~/.ssh/id_rsa
-- eval `ssh-agent -s`
-- ssh-add ~/.ssh/id_rsa
-
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: rsync -r --delete-after --owner=www-data --group=www-data --chown=www-data:www-data --quiet $TRAVIS_BUILD_DIR/build/ $USER@$HOST:$FOLDER
-  on:
-    branch: master
