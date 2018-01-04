@@ -3,7 +3,9 @@ const app = express();
 const path = require('path');
 
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+  path: '/api/chat'
+});
 
 // set the address of the server
 const hostname = '0.0.0.0';
@@ -15,7 +17,7 @@ const room = 'martijncasteel.com'; // TODO rooms
 
 // start the server on specified port
 server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+  console.log(`Server running at http://${hostname}:${port}/api/chat`);
 });
 
 // Routing
