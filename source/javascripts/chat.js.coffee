@@ -55,7 +55,7 @@ Connect to server using socket.io. Set all required
 events for sending and receiving messages.
 ###
 jQuery.fn._setup = (user) ->
-  socket = io('http://localhost:3000')
+  socket = io('/api/chat')
   window.reconnect_attempt = 0
 
   $chat.find('input.message').removeAttr('placeholder').val('');
