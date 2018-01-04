@@ -18,5 +18,5 @@
 .DS_Store
 deploy-key
 
-node_modules/
-!node_modules/helpers/index.js
+/node/node_modules/
+!/node/node_modules/helpers/index.js
