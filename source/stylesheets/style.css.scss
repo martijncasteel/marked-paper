@@ -119,6 +119,10 @@ a.profile {
   }
 }
 
+template {
+  display: none;
+}
+
 article {
   &:first-of-type {
     margin-top: 30px;
@@ -188,26 +192,127 @@ pre.highlight {
   }
 }
 
-a.back {
-  display: none;
-}
+.chat-window {
+  position: relative;
+  display: inline-block;
 
-@media (min-width: 550px) {
-  a.back {
-    display: inline-block;
-    color: #222;
-    text-decoration: none;
-    font-size: 0.8em;
+  min-height: 65vh;
+  width: 100%;
+
+  margin-bottom: 2.5rem;
+
+  border: 1px solid rgb(195, 195, 195);
+  border-radius: 4px;
+  box-shadow: 0px 2px 3px 0px rgba(50, 50, 50, 0.11);
+
+  div.header {
+    line-height: 30px;
+    vertical-align: top;
+    padding: 2px 9px 0;
+
+    span.bullet {
+      height: 11px;
+      width: 11px;
+      display: inline-block;
+      border-radius: 100%;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+
+    span.bullet-close {
+      background: #DF7065;
+      cursor: pointer;
+    }
+
+    span.bullet-minimize {
+      background: #E6BB46;
+    }
+
+    span.bullet-maximize {
+      background: #5BCC8B;
+    }
+  }
+
+  div.body{
+    ul {
+      font-size: 0.8em;
+      list-style-type: none;
+      overflow: scroll;
+      height: 50vh;
+
+      li {
+        position: relative;
+        margin-bottom: 2px;
+      }
+
+      span {
+        display: inline-block;
+        padding-left: 10px;
+      }
+
+      span.name {
+        width: 100px;
+        position: absolute;
+        overflow: hidden;
+      }
+
+      span.message, span.event {
+        border-left: solid 1px rgb(195, 195, 195);
+        margin-left: 110px;
+      }
+
+      span.event {
+        color: rgb(195, 195, 195);
+      }
+    }
+  }
+
+  form.terminal {
     position: absolute;
-    top: 50px;
+    width: 100%;
+    bottom: 0px;
 
-    &:before {
+    display: inline-block;
+    margin-bottom: 0px;
+
+    > input[name='message'] {
+      width: calc(100% - 119px);
+      background: white;
 
       position: relative;
-      top: 3px;
-      margin: 3px;
+      font-size: 0.8em;
+      left: 5px;
+      top: -1px;
 
-      content: url('data:image/svg+xml, <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" width="15" style="enable-background:new 0 0 512.001 512.001;"><g><g><path d="M384.834,180.699c-0.698,0-348.733,0-348.733,0l73.326-82.187c4.755-5.33,4.289-13.505-1.041-18.26 c-5.328-4.754-13.505-4.29-18.26,1.041l-82.582,92.56c-10.059,11.278-10.058,28.282,0.001,39.557l82.582,92.561 c2.556,2.865,6.097,4.323,9.654,4.323c3.064,0,6.139-1.083,8.606-3.282c5.33-4.755,5.795-12.93,1.041-18.26l-73.326-82.188 c0,0,348.034,0,348.733,0c55.858,0,101.3,45.444,101.3,101.3s-45.443,101.3-101.3,101.3h-61.58 c-7.143,0-12.933,5.791-12.933,12.933c0,7.142,5.79,12.933,12.933,12.933h61.58c70.12,0,127.166-57.046,127.166-127.166 C512,237.745,454.954,180.699,384.834,180.699z"/></g></g></svg>');
+      height: 34px;
+      padding-top: 1px;
+      padding-left: 10px;
+      margin-bottom: 5px;
+
+      border: 1px solid rgb(187, 187, 187);
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
+      outline: none;
+    }
+
+    > input[name='submit'] {
+      width: 98px;
+      background: white;
+      margin-bottom: 5px;
+
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+
+    > span {
+      display: none;
+
+      position: absolute;
+      top: -20px;
+      left: 10px;
+
+      color: gray;
+      font-size: 0.6em;
     }
   }
 }

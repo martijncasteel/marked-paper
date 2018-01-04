@@ -1,0 +1,12 @@
+{
+  "name": "chat-app",
+  "version": "0.0.1",
+  "description": "A lightweight chat application working with websockets",
+  "dependencies": {
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  },
+  "scripts": {
+    "start": "/usr/bin/env node server.js"
+  }
+}
