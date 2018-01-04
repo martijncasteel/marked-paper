@@ -19,4 +19,4 @@
 deploy-key
 
 node_modules/
-!node_modules/helpers
+!node_modules/helpers/
