@@ -107,11 +107,11 @@ jQuery.fn._setup = (user) ->
   # reconnect has failed
   socket.on 'reconnect_error', (error) ->
     if window.reconnect_attempt < 1
-      $chat.trigger 'event', 'we\'re not able to reconnect, where are you at?'
+      $chat.trigger 'event', 'we\'re not able to reconnect..'
 
     if window.reconnect_attempt > 5
       socket.close()
-      $chat.trigger 'event', 'it seems we\'re not able to find eachother.. goodbye'
+      $chat.trigger 'event', 'it just didn\'t work, goodbye'
       $chat._init()
 
     ++window.reconnect_attempt
