@@ -18,5 +18,7 @@
 .DS_Store
 deploy-key
 
+letsencrypt.log
+
 /node/node_modules/
 !/node/node_modules/helpers/index.js

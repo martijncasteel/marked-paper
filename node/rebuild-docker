@@ -1,5 +1,6 @@
-docker container kill $(docker container ls -a -q)
-docker container rm $(docker container ls -a -q)
+# $(docker container ls -a -q)
+docker container kill chat-server
+docker container rm chat-server
 
 docker build -t martijncasteel/marked-paper .
-docker run -p 3000:80 -d martijncasteel/marked-paper
+docker run -p 3000:80 --name chat-server -d martijncasteel/marked-paper
