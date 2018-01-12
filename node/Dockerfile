@@ -5,7 +5,7 @@ ENV PORT 80
 WORKDIR /app
 ADD . /app
 
-RUN npm install #--only=production
+RUN npm install --only=production
 
 EXPOSE 3000
-ENTRYPOINT [ "node", "server.js"]
+ENTRYPOINT [ "node", "chat.js"]

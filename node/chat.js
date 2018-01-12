@@ -66,13 +66,13 @@ io.on('connection', function(socket){
     var string = helpers.toString( users );
 
     socket.emit('hello', {
-      message: `Welcome ${socket.username}, ${string}`,
+      message: `Welcome ${socket.username}${string}`,
       users: users
     });
 
     // broadcast a user has joined
     socket.broadcast.emit('hello', {
-      message: `${socket.username} has joined`,
+      message: `${socket.username} joined`,
       username: socket.username
     });
   });
