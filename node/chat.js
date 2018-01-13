@@ -20,8 +20,7 @@ const room = 'martijncasteel.com'; // TODO rooms
 // start the server on specified port
 server.listen(port, hostname, () => {
   console.log(`NodeJS server running`);
-  console.log(`http://${hostname}:${port}/api/chat`)
-  console.log(`${process.env.NODE_ENV}`);
+  console.log(`http://${hostname}:${port}/api/chat`);
 });
 
 // Routing
@@ -88,7 +87,7 @@ io.on('connection', function(socket){
   socket.on('disconnect', function () {
 
     var helpers = require('helpers');
-    helpers.log(socket.id, socket.username, 'disconnected')
+    helpers.log(socket.id, socket.username, 'disconnected', {})
 
     // broadcast a user has left the conversation
     socket.broadcast.emit('bye', {
