@@ -7,6 +7,8 @@ const io = require('socket.io')(server, {
   path: '/api/chat'
 });
 
+const helpers = require('helpers');
+
 // set the address of the server
 const hostname = '0.0.0.0';
 const port = process.env.PORT || 3000;
@@ -17,7 +19,9 @@ const room = 'martijncasteel.com'; // TODO rooms
 
 // start the server on specified port
 server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/api/chat`);
+  console.log(`NodeJS server running`);
+  console.log(`http://${hostname}:${port}/api/chat`)
+  console.log(`${process.env.NODE_ENV}`);
 });
 
 // Routing
@@ -29,9 +33,9 @@ io.on('connection', function(socket){
 
   // broadcast message to all whome are listening
   socket.on('broadcast', function (data) {
-    console.log([socket.id, socket.username, 'broadcast', data])
 
     var helpers = require('helpers');
+    helpers.log(socket.id, socket.username, 'broadcast', {message: data})
 
     // broadcast to all others
     socket.broadcast.emit('broadcast', {
@@ -43,9 +47,9 @@ io.on('connection', function(socket){
 
   // send message to specified user
   socket.on('message', function (data, receiver) {
-    console.log([socket.id, socket.username, 'message', socket.sockets.sockets.find(s => s.id == receiver).username, data])
 
     var helpers = require('helpers');
+    helpers.log(socket.id, socket.username, 'message', { name: socket.sockets.sockets.find(s => s.id == receiver).username, message: data})
 
     // broadcast to all others
     socket.to(receiver).emit('message', {
@@ -57,17 +61,13 @@ io.on('connection', function(socket){
 
   // connects a new user
   socket.on('connected', function (username) {
-    console.log([socket.id, username, 'connected', socket.handshake.address])
 
     var helpers = require('helpers');
+    helpers.log(socket.id, username, 'connected', {ip: socket.handshake.address})
     socket.username = helpers.clean(username);
 
-    var users = helpers.users( io.sockets, socket );
-    var string = helpers.toString( users );
-
     socket.emit('hello', {
-      message: `Welcome ${socket.username}${string}`,
-      users: users
+      message: `Welcome ${socket.username}!`
     });
 
     // broadcast a user has joined
@@ -78,15 +78,17 @@ io.on('connection', function(socket){
   });
 
   socket.on('reconnected', function (username) {
-    console.log([socket.id, username, 'reconnected', socket.handshake.address])
 
     var helpers = require('helpers');
+    helpers.log(socket.id, username, 'reconnected', {ip: socket.handshake.address})
     socket.username = helpers.clean(username);
   });
 
   // a user has dropped their connection
   socket.on('disconnect', function () {
-    console.log([socket.id, socket.username, 'disconnected'])
+
+    var helpers = require('helpers');
+    helpers.log(socket.id, socket.username, 'disconnected')
 
     // broadcast a user has left the conversation
     socket.broadcast.emit('bye', {

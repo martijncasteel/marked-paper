@@ -1,6 +1,8 @@
-# $(docker container ls -a -q)
+# Script to re-create docker for chat server
+# Kills and removes the old server, then rebuilds it and starts the new container
+#
 docker container kill chat-server
 docker container rm chat-server
 
 docker build -t martijncasteel/marked-paper .
-docker run -p 3000:80 --name chat-server -d martijncasteel/marked-paper
+docker run -p 3000:80 --name chat-server -v ${pwd}/share:/share -d martijncasteel/marked-paper

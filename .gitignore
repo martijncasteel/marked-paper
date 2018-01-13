@@ -20,5 +20,6 @@ deploy-key
 
 letsencrypt.log
 
+/node/share/
 /node/node_modules/
 !/node/node_modules/helpers/index.js
