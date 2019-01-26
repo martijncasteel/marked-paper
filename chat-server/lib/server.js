@@ -29,7 +29,7 @@ function Server(){
   this.commands = new Commands(this);
 
   this.config = {
-    hostname: 'macbook.local',
+    hostname: 'martijncasteel.com',
     network: 'Martijn Casteel IRC network',
     email: 'irc@martijncasteel.com',
 
@@ -70,11 +70,11 @@ Server.prototype = {
     this.server = net.createServer(handle);
 
     this.server.listen({
-      host: 'localhost',
-      port: 3000,
+      host: 'martijncasteel.nl',
+      port: 6667,
     });
 
-    console.log('listening on localhost:3000');
+    console.log('listening on martijncasteel.nl:6667');
 
     function handle(stream) {
       try {
