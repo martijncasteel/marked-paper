@@ -1,8 +1,0 @@
-# Script to re-create docker for chat server
-# Kills and removes the old server, then rebuilds it and starts the new container
-#
-docker container kill chat-server
-docker container rm chat-server
-
-docker build -t martijncasteel/marked-paper .
-docker run -p 3001:80 --name chat-server --restart unless-stopped -v /share:/share -d martijncasteel/marked-paper

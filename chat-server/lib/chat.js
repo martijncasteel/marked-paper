@@ -10,8 +10,8 @@ const io = require('socket.io')(server, {
 const helpers = require('helpers');
 
 // set the address of the server
-const hostname = '0.0.0.0';
-const port = process.env.PORT || 3001;
+const hostname = '127.0.0.1';
+const port = process.env.PORT || 3000;
 
 // name the default room for users connecting
 const room = 'martijncasteel.com'; // TODO rooms
@@ -20,7 +20,7 @@ const room = 'martijncasteel.com'; // TODO rooms
 // start the server on specified port
 server.listen(port, hostname, () => {
   console.log(`NodeJS server running`);
-  console.log(`http://${hostname}:${port}/api/chat`);
+  console.log(`http://${hostname}:${port}`);
 });
 
 // Routing
