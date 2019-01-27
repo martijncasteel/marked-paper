@@ -1,12 +1,12 @@
 {
-  "name": "chat-server",
+  "name": "chat-app",
   "version": "0.0.1",
-  "description": "A simple chat server",
-  "main": "chat-server.js",
-  "author": "Martijn Casteel",
-  "license": "MIT",
+  "description": "A lightweight chat application working with websockets",
   "dependencies": {
-    "carrier": "^0.3.0",
-    "net": "^1.0.2"
+    "express": "^4.16.2",
+    "socket.io": "^2.0.4"
+  },
+  "scripts": {
+    "start": "/usr/bin/env node server.js"
   }
 }
