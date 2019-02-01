@@ -1,11 +1,10 @@
 const express = require('express');
+
 const app = express();
 const path = require('path');
 
 const server = require('http').createServer(app);
-const io = require('socket.io')(server, {
-  path: '/api/chat'
-});
+const io = require('socket.io')(server);
 
 const helpers = require('helpers');
 
@@ -23,17 +22,12 @@ server.listen(port, hostname, () => {
   console.log(`http://${hostname}:${port}`);
 });
 
-// Routing
-app.use(express.static(path.join(__dirname, 'public')));
-
-
 // define socket logics; connecting, sending, typing, leaving
 io.on('connection', function(socket){
 
   // broadcast message to all whome are listening
   socket.on('broadcast', function (data) {
 
-    var helpers = require('helpers');
     helpers.log(socket.id, socket.username, 'broadcast', {message: data})
 
     // broadcast to all others
@@ -47,7 +41,6 @@ io.on('connection', function(socket){
   // send message to specified user
   socket.on('message', function (data, receiver) {
 
-    var helpers = require('helpers');
     helpers.log(socket.id, socket.username, 'message', { name: socket.sockets.sockets.find(s => s.id == receiver).username, message: data})
 
     // broadcast to all others
@@ -61,7 +54,6 @@ io.on('connection', function(socket){
   // connects a new user
   socket.on('connected', function (username) {
 
-    var helpers = require('helpers');
     helpers.log(socket.id, username, 'connected', {ip: socket.handshake.address})
     socket.username = helpers.clean(username);
 
@@ -78,7 +70,6 @@ io.on('connection', function(socket){
 
   socket.on('reconnected', function (username) {
 
-    var helpers = require('helpers');
     helpers.log(socket.id, username, 'reconnected', {ip: socket.handshake.address})
     socket.username = helpers.clean(username);
   });
@@ -86,7 +77,6 @@ io.on('connection', function(socket){
   // a user has dropped their connection
   socket.on('disconnect', function () {
 
-    var helpers = require('helpers');
     helpers.log(socket.id, socket.username, 'disconnected', {})
 
     // broadcast a user has left the conversation
