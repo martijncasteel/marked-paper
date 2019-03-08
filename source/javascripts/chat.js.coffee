@@ -118,8 +118,6 @@ jQuery.fn._setup = (user) ->
 
   # close connection on red button and clear username from cookie
   $chat.find('span.bullet-close').on 'click', (event) ->
-    localStorage.removeItem 'username'
-
     socket.close()
     $chat._init()
 
@@ -143,16 +141,7 @@ jQuery.fn._init = ->
     user = $chat.find('input.message').val().clean()
     return unless !!user
 
-    localStorage.username = user
     $chat._setup user
 
 
-###
-Check if username is already set otherwise prompt for
-a username in the input box
-###
-username = localStorage.username
-if username?
-  $chat._setup username
-else
-  $chat._init()
+$chat._init()
