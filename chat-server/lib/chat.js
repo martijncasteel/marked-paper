@@ -11,7 +11,7 @@ const helpers = require('helpers');
 
 // set the address of the server
 const hostname = '127.0.0.1';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3010;
 
 // name the default room for users connecting
 const room = 'martijncasteel.com'; // TODO rooms
