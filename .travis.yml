@@ -4,6 +4,6 @@ language: ruby
 cache: bundler
 
 rvm:
-- 2.4.0
+- 2.6.4
 
 script: bundle exec middleman build
