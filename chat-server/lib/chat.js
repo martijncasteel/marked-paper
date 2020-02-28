@@ -5,7 +5,7 @@ const path = require('path');
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
-  path: '/api/chat'
+  path: '/v1/chat'
 });
 
 const helpers = require('helpers');
