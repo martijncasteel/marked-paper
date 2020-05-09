@@ -2,35 +2,40 @@
 This is where it all the javascript  goes :)
 
 Some javascript to load more posts while scrolling down
-on the page. An error is returned after the last post.
+on the page. When no data-url is no longer present the
+last page has been reached.
 ###
-$(window).on 'scroll', ->
-  offset = $(window).height() + $(window).scrollTop()
-  if offset < $(document).height() - 300
+window.loading = false
+
+document.addEventListener 'scroll', () ->
+
+  if (window.scrollY || window.pageYOffset) + window.innerHeight < document.body.offsetHeight - 300  
     return
-
-  if $('body').attr( 'loading' ) != undefined
+  
+  if window.loading
     return
-
-  # retrieve last url
-  o = $('article:not(:has(*)):first')
-  url = $(o).attr 'data-url'
-
+  
+  window.loading = true
+  
+  article = document.querySelector 'article[data-url]'
+  
+  if article == null || !article.hasAttribute 'data-url'
+    return
+ 
+  url = article.getAttribute 'data-url'
+  
   if url == undefined
-    $(window).off 'scroll'
     return
 
-  # add state to wait for xhr
-  $('body').attr 'loading', ''
+  request = new XMLHttpRequest()
+  request.open 'GET', url, true
+  request.responseType = 'document'
 
-  # retrieve article
-  $.get(url, (data) ->
-    $(o).html( $(data).filter('article').html())
-    $('body').removeAttr 'loading'
-    return
-
-  ).fail ->
-    $(window).off 'scroll'
-    return
-
-  return
+  request.onload = -> 
+    if this.status == 200
+      article.removeAttribute 'data-url'
+      window.loading = false
+ 
+      article.innerHTML = this.response.querySelector('article').innerHTML
+    
+  request.send()
