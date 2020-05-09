@@ -3,6 +3,5 @@ User-agent: *
 Allow: /
 Disallow: /stylesheets/
 Disallow: /javascripts/
-Disallow: /share/
 
 Sitemap: https://martijncasteel.com/sitemap.xml
