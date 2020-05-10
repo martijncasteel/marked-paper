@@ -1,24 +1,23 @@
-name: build
+name: middleman
 
-on:
-  push:
-    branches: [ master ]
+on: [ push, pull_request ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
    
     - name: Read .ruby-version
-      id: version
+      id: ruby-version
       run: cat .ruby-version
     
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ steps.version.outputs.value }}
+        ruby-version: 2.7.1
+        # ruby-version: ${{ steps.ruby-version.outputs.value }}
       
     - name: Install dependencies
       run: bundle install
