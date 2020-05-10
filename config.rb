@@ -9,10 +9,6 @@ end
 activate :directory_indexes
 set :trailing_slash, false
 
-activate :autoprefixer do |prefix|
-  prefix.browsers = 'last 2 versions'
-end
-
 # Layouts
 # https://middlemanapp.com/basics/layouts/
 page '/*.xml', layout: false
@@ -28,8 +24,6 @@ activate :syntax do |syntax|
   syntax.inline_theme = Rouge::Themes::Github.new
   syntax.line_numbers = true
 end
-
-ignore 'node/*'
 
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings

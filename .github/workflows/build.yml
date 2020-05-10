@@ -1,0 +1,27 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+   
+    - name: Read .ruby-version
+      id: version
+      run: cat .ruby-version
+    
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ steps.version.outputs.value }}
+      
+    - name: Install dependencies
+      run: bundle install
+    
+    - name: Build application
+      run: bundle exec middleman build
