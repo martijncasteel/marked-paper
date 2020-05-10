@@ -9,10 +9,6 @@ end
 activate :directory_indexes
 set :trailing_slash, false
 
-activate :autoprefixer do |prefix|
-  prefix.browsers = 'last 2 versions'
-end
-
 # Layouts
 # https://middlemanapp.com/basics/layouts/
 page '/*.xml', layout: false
