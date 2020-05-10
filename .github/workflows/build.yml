@@ -9,14 +9,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
    
-    - name: Read .ruby-version
-      id: ruby-version
-      run: | 
-        echo ::set-env name=VERSION::$(cat .ruby-version)
-
-    - name: test
-      run: echo $VERSION
-    
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
