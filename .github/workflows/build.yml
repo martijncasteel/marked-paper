@@ -11,18 +11,26 @@ jobs:
    
     - name: Read .ruby-version
       id: ruby-version
-      run: cat .ruby-version
+      run: | 
+        echo ::set-env name=VERSION::$(cat .ruby-version)
+
 
     - name: test
-      run: echo ${{ steps.ruby-version.outputs.value }}
+      run: echo $VERSION
     
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ steps.ruby-version.outputs.value }}
+        ruby-version: $VERSION
       
     - name: Install dependencies
       run: bundle install
     
     - name: Build application
       run: bundle exec middleman build
+      
+    - name: Archive build folder
+      uses: actions/upload-artifact@v1
+      with:
+        name: build
+        path: build
