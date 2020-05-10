@@ -12,12 +12,14 @@ jobs:
     - name: Read .ruby-version
       id: ruby-version
       run: cat .ruby-version
+
+    - name: test
+      run: echo ${{ steps.ruby-version.outputs.value }}
     
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7.1
-        # ruby-version: ${{ steps.ruby-version.outputs.value }}
+        ruby-version: ${{ steps.ruby-version.outputs.value }}
       
     - name: Install dependencies
       run: bundle install
