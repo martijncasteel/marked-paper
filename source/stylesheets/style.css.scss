@@ -196,9 +196,7 @@ pre.highlight {
   position: relative;
   display: inline-block;
 
-  min-height: 65vh;
   width: 100%;
-
   margin-bottom: 2.5rem;
 
   border: 1px solid rgb(195, 195, 195);
@@ -237,7 +235,7 @@ pre.highlight {
     ul {
       font-size: 0.8em;
       list-style-type: none;
-      overflow: scroll;
+      overflow-y: scroll;
       height: 50vh;
 
       li {
@@ -268,7 +266,7 @@ pre.highlight {
   }
 
   form.terminal {
-    position: absolute;
+    position: relative;
     width: 100%;
     bottom: 0px;
 
@@ -282,10 +280,8 @@ pre.highlight {
       position: relative;
       font-size: 0.8em;
       left: 5px;
-      top: -1px;
 
       height: 34px;
-      padding-top: 1px;
       padding-left: 10px;
       margin-bottom: 5px;
 
@@ -299,6 +295,7 @@ pre.highlight {
       width: 98px;
       background: white;
       margin-bottom: 5px;
+      padding-left: 27px;
 
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;

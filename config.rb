@@ -29,8 +29,6 @@ activate :syntax do |syntax|
   syntax.line_numbers = true
 end
 
-ignore 'node/*'
-
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 configure :build do
