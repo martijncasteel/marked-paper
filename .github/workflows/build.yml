@@ -20,7 +20,7 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ VERSION }}
+        ruby-version: ${{ env.VERSION }}
       
     - name: Install dependencies
       run: bundle install
