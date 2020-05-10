@@ -9,13 +9,21 @@ jobs:
     steps:
     - uses: actions/checkout@v2
    
-    - name: Set up Ruby
+    - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: .ruby-version
       
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: bundler-ruby-${{ hashFiles('.ruby-version') }}-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          bundler-ruby-${{ hashFiles('.ruby-version') }}-
     - name: Install dependencies
-      run: bundle install
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
     
     - name: Build application
       run: bundle exec middleman build
