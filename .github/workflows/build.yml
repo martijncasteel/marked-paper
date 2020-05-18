@@ -1,4 +1,4 @@
-name: middleman
+name: build
 
 on:
   push:
@@ -24,6 +24,7 @@ jobs:
         key: bundler-ruby-${{ hashFiles('.ruby-version') }}-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           bundler-ruby-${{ hashFiles('.ruby-version') }}-
+          
     - name: Install dependencies
       run: |
         bundle config path vendor/bundle
