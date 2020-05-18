@@ -16,7 +16,7 @@
     ~ yield
 
     - blog.articles[0..1].each do |article|
-      %article{ 'data-url' => article.url }
+      %article
 
         = link_to article.url do
           %h2= article.title
@@ -31,6 +31,6 @@
         %hr
 
     - blog.articles.drop(2).each do |article|
-      %article{ 'data-url' => article.url }
+      %article{ 'data-url' => article.url + '/' }
 
     = partial 'footer'
