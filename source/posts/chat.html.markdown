@@ -42,7 +42,7 @@ A new small project, something to play around with. A chat application that allo
   <form class="terminal">
     <span>martijn is typing...</span>
     <input name="message" class="message" disabled="disabled" />
-    <input type="submit" name="submit" value="send" />
+    <input type="submit" name="submit" value="send" disabled="disabled" />
   </form>
 </div>
 
