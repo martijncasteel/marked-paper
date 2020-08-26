@@ -129,18 +129,12 @@ article {
   }
 
   span {
-    &.created {
-      font-size: 0.8em;
-      color: gray;
-      display: inline-block;
-      padding-bottom: 10px;
-    }
+    font-size: 0.8em;
+    color: gray;
+    display: inline-block;
+    padding-bottom: 10px;
 
     &.additional {
-      font-size: 0.8em;
-      color: gray;
-      display: inline-block;
-      padding-bottom: 10px;
       &::before {
         content: '|';
         margin: 0 5px;
@@ -215,6 +209,7 @@ pre.highlight {
       border-radius: 100%;
       vertical-align: middle;
       margin-right: 5px;
+      padding: 0;
     }
 
     span.bullet-close {
@@ -358,5 +353,71 @@ pre.highlight {
     color: #1EAEDB;
     text-decoration: none !important;
     content: " (" attr(href) ")";
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #121212;
+    color: #ececec;
+
+    font-weight: 300;
+  }
+
+  img, video {
+    filter: brightness(.8) contrast(1.2);
+  }
+
+  a.profile {
+    background-color: #fbfbfb;
+    border: 1px solid #30475e;
+
+    &:before, &:after {
+      background-color: #30475e;
+    }
+  } 
+
+  h1, h2 {
+    color: #f2a365;
+  }
+
+  article { 
+    span {
+      color: #ececec;
+    }
+
+    code {
+      background-color: #30475e;
+      border-color: #30475e;
+    }
+
+    a {
+      color: #f2a365;
+
+      &:hover {
+        color: #30475e;
+      }
+    }
+
+    hr {
+      border-top-color: #30475e;
+    }
+  }
+
+  .chat-window {
+    border-color: #30475e;
+
+    form.terminal {
+      > input[name='message'] {
+        background: #222831;
+        border-color: #30475e;
+      }
+
+      > input[name='submit'] {
+        background: #222831;
+        border-color: #30475e;
+        color: #ececec;
+      }
+    }
   }
 }
