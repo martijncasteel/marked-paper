@@ -193,6 +193,7 @@ pre.highlight {
   }
 }
 
+// styling for the .chat-window
 .chat-window {
   position: relative;
   display: inline-block;
@@ -316,7 +317,16 @@ pre.highlight {
   }
 }
 
-// print style
+// styling for simple game
+canvas#simple-game {
+  background-color: #001f1f;
+  width: 100%; // TODO: styling for mobile
+  height: 400px;
+
+  margin-bottom: 25px;
+}
+
+// print style, for whoever does that
 @media print {
   @page {
     size: A4;
@@ -361,8 +371,13 @@ pre.highlight {
     text-decoration: none !important;
     content: " (" attr(href) ")";
   }
+
+  .chat-window, canvas {
+    display: none;
+  }
 }
 
+// dark color scheme
 @media (prefers-color-scheme: dark) {
   html, body {
     background-color: #121212;

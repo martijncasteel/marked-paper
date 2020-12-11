@@ -1,7 +1,7 @@
 User-agent: *
 
 Allow: /
-Disallow: /stylesheets/
-Disallow: /javascripts/
+Disallow: /style/
+Disallow: /script/
 
 Sitemap: https://martijncasteel.com/sitemap.xml
