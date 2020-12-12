@@ -10,7 +10,7 @@ To try something I got the idea to create a small game. It's just for fun!
 loading...
 </canvas>
 
-<script defer>
+script defer
 
 The game should work with javascript and using an update/draw function to draw a new frame. 
 

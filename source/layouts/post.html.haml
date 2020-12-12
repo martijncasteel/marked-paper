@@ -1,7 +1,22 @@
 !!! 5
 %html{ 'lang' => 'en' }
   %head
-    = partial 'header', :locals => { :title => current_page.data.title }
+    %meta{ 'http-equiv' => 'Content-Type', :content => 'text/html; charset=UTF-8' }
+
+    %meta{ :content => 'ie=edge', 'http-equiv' => 'x-ua-compatible' }
+    %meta{ :content => 'width=device-width, initial-scale=1, shrink-to-fit=no', :name => 'viewport' }
+
+    = feed_tag :atom, 'feed.xml'
+    = favicon_tag '/images/favicon.ico'
+    = stylesheet_link_tag 'style'
+
+    %meta{ :content => 'Well about me, Martijn Casteel, at easy as that!', :name => 'description' }
+
+    %title
+      Martijn Casteel
+      = precede ' - ' do
+        = current_page.data.title
+
 
     %meta{ :property => 'og:title', :content => current_page.title }
     %meta{ :property => 'og:image', :content => '/images/profile.jpg' }
@@ -27,4 +42,6 @@
 
       %hr
 
-    = partial 'footer'
+    = javascript_include_tag 'turbolinks.js'
+    = javascript_include_tag 'app'
+
