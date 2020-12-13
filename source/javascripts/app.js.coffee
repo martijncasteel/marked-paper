@@ -8,7 +8,6 @@ last page has been reached.
 window.loading = false
 
 document.addEventListener 'scroll', () ->
-
   if (window.scrollY || window.pageYOffset) + window.innerHeight < document.body.offsetHeight - 300  
     return
   
