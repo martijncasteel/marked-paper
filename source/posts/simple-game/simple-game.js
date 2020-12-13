@@ -102,21 +102,21 @@ canvas.addEventListener('click', function(event){
 });
 
 let capture_touches = function(enable){
+  let touch = function(event){
+    if(event.touches)
+      pressed['touch'] = event.touches[0].pageX - canvas.offsetLeft - player.width / 2;
+    event.preventDefault();
+  }
+
   if(!enable){
-    canvas.removeEventListener('touchstart');
-    canvas.removeEventListener('touchmove');
+    canvas.removeEventListener('touchstart', touch);
+    canvas.removeEventListener('touchmove', touch);
 
     return
   }
 
   if(!MOBILE_DEVICE)
     return
-
-  let touch = function(event){
-    if(event.touches)
-      pressed['touch'] = event.touches[0].pageX - canvas.offsetLeft - player.width / 2;
-    event.preventDefault();
-  }
 
   canvas.addEventListener("touchstart", touch, {passive: false});
   canvas.addEventListener("touchmove", touch, {passive: false});
@@ -209,7 +209,6 @@ class Paddle {
 
         if(ball.dy > -10 && ball.dy < 10)
           ball.dy *= 1.05;
-
         return true;
       }
     }
