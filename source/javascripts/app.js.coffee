@@ -1,5 +1,5 @@
 ###
-This is where it all the javascript  goes :)
+This is where all the javascript goes :)
 
 Some javascript to load more posts while scrolling down
 on the page. When no data-url is no longer present the

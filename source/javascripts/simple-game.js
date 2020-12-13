@@ -1,6 +1,6 @@
 const MOBILE_DEVICE = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 const STATES = { COIN: 0, PLAYING: 1, GAMEOVER: 2 }
-const MAX_SCORE = 17;
+const MAX_SCORE = 16;
 
 let canvas = document.getElementById('simple-game')
 canvas.width  = canvas.offsetWidth;
@@ -101,12 +101,6 @@ canvas.addEventListener('click', function(event){
   state = STATES.PLAYING;
 });
 
-
-// request frames to update values and render the game
-window.onload = function() {
-  frame_count = window.requestAnimationFrame(loop)
-};
-
 let capture_touches = function(enable){
   if(!enable){
     canvas.removeEventListener('touchstart');
@@ -127,6 +121,12 @@ let capture_touches = function(enable){
   canvas.addEventListener("touchstart", touch, {passive: false});
   canvas.addEventListener("touchmove", touch, {passive: false});
 }
+
+
+// request frames to update values and render the game
+window.onload = function() {
+  frame_count = window.requestAnimationFrame(loop)
+};
 
 let loop = function() {
   if('Enter' in pressed)
@@ -204,10 +204,11 @@ class Paddle {
   hit(ball) {
     if(ball.y > this.y && ball.y < this.y + this.height) {
       if(ball.x > this.x && ball.x < this.x + this.width) {
-        // TODO maybe check direction with paddle (or halve of screen) to prevent sticking
-
-        ball.dy = -ball.dy * 1.05;
+        ball.dy = -ball.dy;
         ball.dx += this.dx / 2;
+
+        if(ball.dy > -10 && ball.dy < 10)
+          ball.dy *= 1.05;
 
         return true;
       }
@@ -279,7 +280,7 @@ const ball = new Ball();
 
 // compute collisions and sofort
 let update = function() {
-  if(player.score > MAX_SCORE || computer.score > MAX_SCORE){
+  if(player.score >= MAX_SCORE || computer.score >= MAX_SCORE){
     state = STATES.GAMEOVER
     capture_touches(enable=false)
   }

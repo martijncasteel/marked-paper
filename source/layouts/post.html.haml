@@ -10,6 +10,10 @@
     = favicon_tag '/images/favicon.ico'
     = stylesheet_link_tag 'style'
 
+    = javascript_include_tag 'turbolinks.js'
+    = javascript_include_tag 'app', defer: true
+    = javascript_include_tag 'simple-game.js', defer: true
+
     %meta{ :content => 'Well about me, Martijn Casteel, at easy as that!', :name => 'description' }
 
     %title
@@ -41,7 +45,3 @@
       ~ yield
 
       %hr
-
-    = javascript_include_tag 'turbolinks.js'
-    = javascript_include_tag 'app'
-
