@@ -2,19 +2,7 @@ const MOBILE_DEVICE = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera 
 const STATES = { COIN: 0, PLAYING: 1, GAMEOVER: 2 }
 const MAX_SCORE = 16;
 
-let canvas = document.getElementById('simple-game')
-canvas.width  = canvas.offsetWidth;
-canvas.height = canvas.width * 1,5;
-
-if(MOBILE_DEVICE)
-  canvas.height = canvas.width * 2;
-
-let context = canvas.getContext('2d');
-let state = STATES.COIN;
-let frame_count = 0;
-let pressed = {};
-
-const characters = {
+const CHARACTERS = {
   '0': [...'011110110011110011110011110011110011011110'],
   '1': [...'001100011100001100001100001100001100011110'],
   '2': [...'011110110011000011001110011000110000111111'],
@@ -50,105 +38,21 @@ const characters = {
   ' ': [...'00000'],
 }
 
-let character = function(character, offset_x, offset_y, size = 5) {
-  const pixels = characters[character];
-  context.fillStyle = '#fff';
-
-  if(pixels == undefined)
-    return 0
-
-  if(character === ' ')
-    return pixels.length * size;
-
-  const cols = pixels.length / 7;
-
-  for(let y = 0; y < 7; y++)
-    for(let x = 0; x < cols; x++)
-      if(pixels[y * cols + x] == '1')
-        context.fillRect(x * size + offset_x, y * size + offset_y, size, size)
-
-  // width of the letter
-  return cols * size
-}
-
-let text = function(string, offset_x, offset_y, size = 5, spacing = 5) {
-  let offset = 0;
-
-  for(let c in [...string]){
-    offset = character([...string][c], offset_x + c * offset, offset_y, size) + spacing
-  }
-}
-
-window.addEventListener('keydown', function(event) {
-  pressed[event.key] = true;
-});
-
-window.addEventListener('keyup', function(event) {
-  delete pressed[event.key];
-});
-
-canvas.addEventListener('click', function(event){
-  if(state == STATES.GAMEOVER) {
-    player.reset()
-    computer.reset()
-
-    capture_touches(enable=false)
-    state = STATES.PLAYING;
-    return;
-  }
-
-  capture_touches(enable=true)
-  state = STATES.PLAYING;
-});
-
-let capture_touches = function(enable){
-  let touch = function(event){
-    if(event.touches)
-      pressed['touch'] = event.touches[0].pageX - canvas.offsetLeft - player.width / 2;
-    event.preventDefault();
-  }
-
-  if(!enable){
-    canvas.removeEventListener('touchstart', touch);
-    canvas.removeEventListener('touchmove', touch);
-
-    return
-  }
-
-  if(!MOBILE_DEVICE)
-    return
-
-  canvas.addEventListener("touchstart", touch, {passive: false});
-  canvas.addEventListener("touchmove", touch, {passive: false});
-}
-
-
-// request frames to update values and render the game
-window.onload = function() {
-  frame_count = window.requestAnimationFrame(loop)
-};
-
-let loop = function() {
-  if('Enter' in pressed)
-    if(state == STATES.COIN || state == STATES.GAMEOVER)
-      state = STATES.PLAYING;
-
-  update();
-  render();
-
-  frame_count = window.requestAnimationFrame(loop);
-};
+let canvas;
+let state = STATES.COIN;
+let frame_count = 0;
+let pressed = {};
 
 // computer and player paddle
 class Paddle {
-  constructor(x, y) {
+  constructor(x, y, width) {
     this.x = x;
     this.y = y;
 
     this.dx = 0;
 
     this.height = 12;
-    this.width = canvas.width * 0.25;
+    this.width = width;
 
     this.score = 0;
   }
@@ -165,11 +69,11 @@ class Paddle {
         this.move(max_movement);
 
       else if(key == 'touch') {
-        if(player.x - pressed['touch'] > 0)
-          player.move(Math.max(pressed['touch'] - player.x, -4))
+        if(this.x - pressed['touch'] > 0)
+          this.move(Math.max(pressed['touch'] - this.x, -4))
 
-        else if(player.x - pressed['touch'] < 0)
-          player.move(Math.min(pressed['touch'] - player.x, 4))
+        else if(this.x - pressed['touch'] < 0)
+          this.move(Math.min(pressed['touch'] - this.x, 4))
       } else
         this.move(0)
     }
@@ -244,14 +148,14 @@ class Ball {
     // ball passed paddle
     if(this.y < 0){
       player.score++
-      ball.reset(3)
+      this.reset(3)
     } else if(this.y > canvas.height) {
       computer.score++
-      ball.reset(-3)
+      this.reset(-3)
     }
 
-    player.hit(ball);
-    computer.hit(ball);
+    player.hit(this);
+    computer.hit(this);
   }
 
   reset(dy = 3) {
@@ -271,57 +175,155 @@ class Ball {
 }
 
 
-// initialize player and computer's paddle, and the star of the game the ball
-const player = new Paddle(canvas.width / 2 - canvas.width * 0.25 / 2, canvas.height - 30);
-const computer = new Paddle(canvas.width / 2 - canvas.width * 0.25 / 2, 15);
-const ball = new Ball();
+window.onload = () => {
+  canvas = document.getElementById('simple-game');
+  canvas.width  = canvas.offsetWidth;
+  canvas.height = canvas.width * 1,5;
 
+  if(MOBILE_DEVICE)
+    canvas.height = canvas.width * 2;
 
-// compute collisions and sofort
-let update = function() {
-  if(player.score >= MAX_SCORE || computer.score >= MAX_SCORE){
-    state = STATES.GAMEOVER
-    capture_touches(enable=false)
+  let context = canvas.getContext('2d');
+
+  let character = (character, offset_x, offset_y, size = 5) => {
+    const pixels = CHARACTERS[character];
+    context.fillStyle = '#fff';
+
+    if(pixels == undefined)
+      return 0
+
+    if(character === ' ')
+      return pixels.length * size;
+
+    const cols = pixels.length / 7;
+
+    for(let y = 0; y < 7; y++)
+      for(let x = 0; x < cols; x++)
+        if(pixels[y * cols + x] == '1')
+          context.fillRect(x * size + offset_x, y * size + offset_y, size, size)
+
+    // width of the letter
+    return cols * size
   }
 
-  if(state != STATES.PLAYING)
-    return
+  let text = (string, offset_x, offset_y, size = 5, spacing = 5) => {
+    let offset = 0;
 
-  player.update(computer.score);
-  computer.compute(ball, player.score);
-
-  ball.update(player, computer);
-};
-
-// draw new frame
-let render = function() {
-  context.clearRect(0, 0, canvas.width, canvas.height)
-
-  player.draw(context);
-  computer.draw(context);
-
-  // ask for coin
-  if(state == STATES.COIN)
-    text('PONG', canvas.width/2 - 107, 200, 10)
-
-  if(state == STATES.GAMEOVER)
-    text('GAME OVER', canvas.width/2 - 245, 200, 10)
-
-  if(state == STATES.COIN || state == STATES.GAMEOVER){
-    if(frame_count % 60 < 30){
-      context.strokeStyle = '#fff';
-      context.lineWidth = 5;
-      context.strokeRect(canvas.width/2 - 107, 380, 215, 40);
-
-      text('insert coin', canvas.width/2 - 92, 390, 3, 2)
-      text('or PRESS enter', canvas.width/2 - 83, 430, 2, 2)
+    for(let c in [...string]){
+      offset = character([...string][c], offset_x + c * offset, offset_y, size) + spacing
     }
   }
-  
-  if(state == STATES.PLAYING)
-    ball.draw(context);
 
-  // score board
-  text(player.score.toString(), canvas.width - player.score.toString().length * 35 - 5, canvas.height - 45) 
-  text(computer.score.toString(), 10, 10) 
+  window.addEventListener('keydown', (event) => {
+    pressed[event.key] = true;
+  });
+
+  window.addEventListener('keyup', (event) => {
+    delete pressed[event.key];
+  });
+
+  canvas.addEventListener('click', (event) => {
+    if(state == STATES.GAMEOVER) {
+      player.reset()
+      computer.reset()
+
+      capture_touches(enable=false)
+      state = STATES.PLAYING;
+      return;
+    }
+
+    capture_touches(enable=true)
+    state = STATES.PLAYING;
+  });
+
+  let capture_touches = (enable) => {
+    let touch = (event) => {
+      if(event.touches)
+        pressed['touch'] = event.touches[0].pageX - canvas.offsetLeft - player.width / 2;
+      event.preventDefault();
+    }
+
+    if(!enable){
+      canvas.removeEventListener('touchstart', touch);
+      canvas.removeEventListener('touchmove', touch);
+
+      return
+    }
+
+    if(!MOBILE_DEVICE)
+      return
+
+    canvas.addEventListener("touchstart", touch, {passive: false});
+    canvas.addEventListener("touchmove", touch, {passive: false});
+  }
+
+
+  // initialize player and computer's paddle, and the star of the game the ball
+  const player = new Paddle(canvas.width / 2 - canvas.width * 0.25 / 2, canvas.height - 30, canvas.width * 0.25);
+  const computer = new Paddle(canvas.width / 2 - canvas.width * 0.25 / 2, 15, canvas.width * 0.25);
+  const ball = new Ball();
+
+
+  // compute collisions and sofort
+  let update = () => {
+    if(player.score >= MAX_SCORE || computer.score >= MAX_SCORE){
+      state = STATES.GAMEOVER
+      capture_touches(enable=false)
+    }
+
+    if(state != STATES.PLAYING)
+      return
+
+    player.update(computer.score);
+    computer.compute(ball, player.score);
+
+    ball.update(player, computer);
+  };
+
+  // draw new frame
+  let render = () => {
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    player.draw(context);
+    computer.draw(context);
+
+    // ask for coin
+    if(state == STATES.COIN)
+      text('PONG', canvas.width/2 - 107, 200, 10)
+
+    if(state == STATES.GAMEOVER)
+      text('GAME OVER', canvas.width/2 - 245, 200, 10)
+
+    if(state == STATES.COIN || state == STATES.GAMEOVER){
+      if(frame_count % 60 < 30){
+        context.strokeStyle = '#fff';
+        context.lineWidth = 5;
+        context.strokeRect(canvas.width/2 - 107, 380, 215, 40);
+
+        text('insert coin', canvas.width/2 - 92, 390, 3, 2)
+        text('or PRESS enter', canvas.width/2 - 83, 430, 2, 2)
+      }
+    }
+    
+    if(state == STATES.PLAYING)
+      ball.draw(context);
+
+    // score board
+    text(player.score.toString(), canvas.width - player.score.toString().length * 35 - 5, canvas.height - 45) 
+    text(computer.score.toString(), 10, 10) 
+  };
+
+
+  // request frames to update values and render the game
+  let loop = () => {
+    if('Enter' in pressed)
+      if(state == STATES.COIN || state == STATES.GAMEOVER)
+        state = STATES.PLAYING;
+
+    update();
+    render();
+
+    frame_count = window.requestAnimationFrame(loop);
+  };
+  frame_count = window.requestAnimationFrame(loop)
 };
