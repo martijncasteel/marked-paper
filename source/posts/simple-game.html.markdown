@@ -30,3 +30,10 @@ let loop = function() {
 I couldn't find a nice font that worked with these large texts. So I made my own letters, each of them with a height of 7 blocks. Each character has a variable width, but all letters had a width of 5 and the numbers 6 across. Using a simple array I would know where to draw a rectangle creating a letter. Each rectangle had a variable size. It was not really nessesary but fun to do!
 
 For now you play against a simple AI which improves if your score increases. The game ends if you have a score of 16, good luck! 
+
+
+```js
+// some hints if you're having a hard time
+pong.player.width = 450
+pong.score = 15
+```
