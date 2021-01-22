@@ -212,7 +212,7 @@ class Pong {
 
     if(this.#player.score >= MAX_SCORE || this.#computer.score >= MAX_SCORE){
       this.#state = STATES.GAMEOVER
-      capture_touches(this.#canvas, false)
+      this.#capture_touches(this.#canvas, false)
     }
 
     if(this.#state != STATES.PLAYING)
