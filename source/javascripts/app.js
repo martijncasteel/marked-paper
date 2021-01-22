@@ -35,7 +35,9 @@ document.addEventListener('scroll', () => {
     if (this.status === 200) {
       article.removeAttribute('data-url');
       window.loading = false;
+
       article.innerHTML = this.response.querySelector('article').innerHTML;
+      window.dispatchEvent(new CustomEvent('domchanged', {detail: { target: article }}))
     }
   };
 

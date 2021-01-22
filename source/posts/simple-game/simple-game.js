@@ -38,21 +38,23 @@ const CHARACTERS = {
   ' ': [...'00000'],
 }
 
+let pong;
 let canvas;
-let state = STATES.COIN;
 let frame_count = 0;
 let pressed = {};
 
+
 // computer and player paddle
 class Paddle {
-  constructor(x, y, width) {
-    this.x = x;
+  constructor(canvas, y) {
+    this.canvas = canvas
+    this.x = this.canvas.width / 2 - this.canvas.width * 0.25 / 2;
     this.y = y;
 
     this.dx = 0;
 
     this.height = 12;
-    this.width = width;
+    this.width = this.canvas.width * 0.25;
 
     this.score = 0;
   }
@@ -99,8 +101,8 @@ class Paddle {
     if(this.x < 0){
       this.x = 0;
       this.dx = 0;
-    } else if(this.x + this.width > canvas.width) {
-      this.x = canvas.width - this.width;
+    } else if(this.x + this.width > this.canvas.width) {
+      this.x = this.canvas.width - this.width;
       this.dx = 0;
     }
   }
@@ -126,14 +128,15 @@ class Paddle {
   }
 
   reset() {
-    this.x = canvas.width / 2 - canvas.width * 0.25 / 2;
+    this.x = this.canvas.width / 2 - this.canvas.width * 0.25 / 2;
     this.dx = 0;
     this.score = 0;
   }
 }
 
 class Ball {
-  constructor() {
+  constructor(canvas) {
+    this.canvas = canvas
     this.reset()
   }
 
@@ -142,14 +145,14 @@ class Ball {
     this.y += this.dy;
 
     // check for sides
-    if(this.x - 5 < 0 || this.x + 5 > canvas.width)
+    if(this.x - 5 < 0 || this.x + 5 > this.canvas.width)
       this.dx = -this.dx;
 
     // ball passed paddle
     if(this.y < 0){
       player.score++
       this.reset(3)
-    } else if(this.y > canvas.height) {
+    } else if(this.y > this.canvas.height) {
       computer.score++
       this.reset(-3)
     }
@@ -159,8 +162,8 @@ class Ball {
   }
 
   reset(dy = 3) {
-    this.x = canvas.width / 2 - 5;
-    this.y = canvas.height / 2 - 5;
+    this.x = this.canvas.width / 2 - 5;
+    this.y = this.canvas.height / 2 - 5;
 
     this.dx = 0;
     this.dy = dy;
@@ -175,71 +178,113 @@ class Ball {
 }
 
 
-window.onload = () => {
-  canvas = document.getElementById('simple-game');
-  canvas.width  = canvas.offsetWidth;
-  canvas.height = canvas.width * 1,5;
+class Pong {
+  #canvas;
+  #player;
+  #computer;
+  #ball;
+  #state
 
-  if(MOBILE_DEVICE)
-    canvas.height = canvas.width * 2;
+  constructor(el) {
+    this.#canvas = el;
+    this.#canvas.width  = this.#canvas.offsetWidth;
+    this.#canvas.height = this.#canvas.width * 1,5;
 
-  let context = canvas.getContext('2d');
+    if(MOBILE_DEVICE)
+      this.#canvas.height = this.#canvas.width * 2;
+  
+    this.context = this.#canvas.getContext('2d');
+    this.#state = STATES.COIN;
 
-  let character = (character, offset_x, offset_y, size = 5) => {
-    const pixels = CHARACTERS[character];
-    context.fillStyle = '#fff';
+    // initialize player and computer's paddle, and the star of the game the ball
+    this.#player = new Paddle(this.#canvas, this.#canvas.height - 30);
+    this.#computer = new Paddle(this.#canvas, 15);
+    this.#ball = new Ball(this.#canvas);
 
-    if(pixels == undefined)
-      return 0
-
-    if(character === ' ')
-      return pixels.length * size;
-
-    const cols = pixels.length / 7;
-
-    for(let y = 0; y < 7; y++)
-      for(let x = 0; x < cols; x++)
-        if(pixels[y * cols + x] == '1')
-          context.fillRect(x * size + offset_x, y * size + offset_y, size, size)
-
-    // width of the letter
-    return cols * size
+    this.#addEventListeners(this.#canvas)
   }
 
-  let text = (string, offset_x, offset_y, size = 5, spacing = 5) => {
-    let offset = 0;
+  // compute collisions and sofort
+  update() {
+    if('Enter' in pressed)
+      if(this.#state == STATES.COIN || this.#state == STATES.GAMEOVER)
+        this.#state = STATES.PLAYING;
 
-    for(let c in [...string]){
-      offset = character([...string][c], offset_x + c * offset, offset_y, size) + spacing
+    if(this.#player.score >= MAX_SCORE || this.#computer.score >= MAX_SCORE){
+      this.#state = STATES.GAMEOVER
+      capture_touches(this.#canvas, false)
     }
+
+    if(this.#state != STATES.PLAYING)
+      return
+
+    this.#player.update(this.#computer.score);
+    this.#computer.compute(this.#ball, this.#player.score);
+
+    this.#ball.update(this.#player, this.#computer);
   }
 
-  window.addEventListener('keydown', (event) => {
-    pressed[event.key] = true;
-  });
+  // draw new frame
+  render(frame_count) {
+    this.context.clearRect(0, 0, this.#canvas.width, this.#canvas.height)
 
-  window.addEventListener('keyup', (event) => {
-    delete pressed[event.key];
-  });
+    this.#player.draw(this.context);
+    this.#computer.draw(this.context);
 
-  canvas.addEventListener('click', (event) => {
-    if(state == STATES.GAMEOVER) {
-      player.reset()
-      computer.reset()
+    // ask for coin
+    if(this.#state == STATES.COIN)
+      this.#text('PONG', this.#canvas.width/2 - 107, 200, 10)
 
-      capture_touches(enable=false)
-      state = STATES.PLAYING;
-      return;
+    if(this.#state == STATES.GAMEOVER)
+      this.#text('GAME OVER', this.#canvas.width/2 - 245, 200, 10)
+
+    if(this.#state == STATES.COIN || this.#state == STATES.GAMEOVER){
+      if(frame_count % 60 < 30){
+        this.context.strokeStyle = '#fff';
+        this.context.lineWidth = 5;
+        this.context.strokeRect(this.#canvas.width/2 - 107, 380, 215, 40);
+
+        this.#text('insert coin', this.#canvas.width/2 - 92, 390, 3, 2)
+        this.#text('or PRESS enter', this.#canvas.width/2 - 83, 430, 2, 2)
+      }
     }
+    
+    if(this.#state == STATES.PLAYING)
+      this.#ball.draw(this.context);
 
-    capture_touches(enable=true)
-    state = STATES.PLAYING;
-  });
+    // score board
+    this.#text(this.#player.score.toString(), this.#canvas.width - this.#player.score.toString().length * 35 - 5, this.#canvas.height - 45) 
+    this.#text(this.#computer.score.toString(), 10, 10) 
+  }
 
-  let capture_touches = (enable) => {
+  #addEventListeners(canvas) {
+    window.addEventListener('keydown', (event) => {
+      pressed[event.key] = true;
+    });
+
+    window.addEventListener('keyup', (event) => {
+      delete pressed[event.key];
+    });
+
+    canvas.addEventListener('click', (event) => {
+      if(this.#state == STATES.GAMEOVER) {
+        this.#player.reset()
+        this.#computer.reset()
+
+        this.#capture_touches(canvas, false)
+        this.#state = STATES.PLAYING;
+        return;
+      }
+
+      this.#capture_touches(canvas, true)
+      this.#state = STATES.PLAYING;
+    })
+  }
+
+  #capture_touches(canvas, enable) {
     let touch = (event) => {
       if(event.touches)
-        pressed['touch'] = event.touches[0].pageX - canvas.offsetLeft - player.width / 2;
+        pressed['touch'] = event.touches[0].pageX - canvas.offsetLeft - this.#player.width / 2;
       event.preventDefault();
     }
 
@@ -257,73 +302,63 @@ window.onload = () => {
     canvas.addEventListener("touchmove", touch, {passive: false});
   }
 
+  // todo #var and #method for private usage
+  #character(character, offset_x, offset_y, size = 5) {
+    const pixels = CHARACTERS[character];
+    this.context.fillStyle = '#fff';
 
-  // initialize player and computer's paddle, and the star of the game the ball
-  const player = new Paddle(canvas.width / 2 - canvas.width * 0.25 / 2, canvas.height - 30, canvas.width * 0.25);
-  const computer = new Paddle(canvas.width / 2 - canvas.width * 0.25 / 2, 15, canvas.width * 0.25);
-  const ball = new Ball();
+    if(pixels == undefined)
+      return 0
 
+    if(character === ' ')
+      return pixels.length * size;
 
-  // compute collisions and sofort
-  let update = () => {
-    if(player.score >= MAX_SCORE || computer.score >= MAX_SCORE){
-      state = STATES.GAMEOVER
-      capture_touches(enable=false)
+    const cols = pixels.length / 7;
+
+    for(let y = 0; y < 7; y++)
+      for(let x = 0; x < cols; x++)
+        if(pixels[y * cols + x] == '1')
+          this.context.fillRect(x * size + offset_x, y * size + offset_y, size, size)
+
+    // width of the letter
+    return cols * size
+  }
+
+  #text(string, offset_x, offset_y, size = 5, spacing = 5) {
+    let offset = 0;
+
+    for(let c in [...string]){
+      offset = this.#character([...string][c], offset_x + c * offset, offset_y, size) + spacing
     }
+  } 
+}
 
-    if(state != STATES.PLAYING)
-      return
+let loop = () => {
+  pong.update();
+  pong.render(frame_count);
 
-    player.update(computer.score);
-    computer.compute(ball, player.score);
+  frame_count = window.requestAnimationFrame(loop);
+}
 
-    ball.update(player, computer);
-  };
+window.addEventListener('domchanged', (e) => {
+  const canvas = e.detail.target.querySelector('canvas#simple-game')
 
-  // draw new frame
-  let render = () => {
-    context.clearRect(0, 0, canvas.width, canvas.height)
+  if (!canvas)
+    return
 
-    player.draw(context);
-    computer.draw(context);
+  if(!!pong)
+    return
 
-    // ask for coin
-    if(state == STATES.COIN)
-      text('PONG', canvas.width/2 - 107, 200, 10)
+  pong = new Pong(canvas)
+  frame_count = window.requestAnimationFrame(loop);
+})
 
-    if(state == STATES.GAMEOVER)
-      text('GAME OVER', canvas.width/2 - 245, 200, 10)
+window.onload = () => {
+  const canvas = document.getElementById('simple-game')
 
-    if(state == STATES.COIN || state == STATES.GAMEOVER){
-      if(frame_count % 60 < 30){
-        context.strokeStyle = '#fff';
-        context.lineWidth = 5;
-        context.strokeRect(canvas.width/2 - 107, 380, 215, 40);
+  if (!canvas)
+    return
 
-        text('insert coin', canvas.width/2 - 92, 390, 3, 2)
-        text('or PRESS enter', canvas.width/2 - 83, 430, 2, 2)
-      }
-    }
-    
-    if(state == STATES.PLAYING)
-      ball.draw(context);
-
-    // score board
-    text(player.score.toString(), canvas.width - player.score.toString().length * 35 - 5, canvas.height - 45) 
-    text(computer.score.toString(), 10, 10) 
-  };
-
-
-  // request frames to update values and render the game
-  let loop = () => {
-    if('Enter' in pressed)
-      if(state == STATES.COIN || state == STATES.GAMEOVER)
-        state = STATES.PLAYING;
-
-    update();
-    render();
-
-    frame_count = window.requestAnimationFrame(loop);
-  };
-  frame_count = window.requestAnimationFrame(loop)
+  pong = new Pong(canvas)
+  frame_count = window.requestAnimationFrame(loop);
 };
