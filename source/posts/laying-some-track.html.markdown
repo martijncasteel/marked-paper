@@ -18,12 +18,14 @@ For the new member registration application together with a few we started to bu
 
 Building a Rails application is quite easy, I would really recommend reading the [getting started](http://guides.rubyonrails.org/getting_started.html) guide and creating the simple blog, Ruby is easy, it is well documented and readable, one of the easiest languages I have done in a while. Just start programming, as long as your database design is solid improvements can always be done. There are some awesome libraries, so called gems, for Rails such as; [haml], [rabl], [devise], and [paperclip], and probably a few more.
 
-The application I created `constipated-koala` should be open-sourced and is mainly for associations to track their members, groups, and activities. I'm actually quite happy with it, my first lines of code aren't the best, but they do work. I have implemented some cool features; it is now an OAuth provider for members and has integration with an online payment provider. However, at the moment I cannot open-source it yet since I used some licensed stylesheets which I cannot share and it is still under development, but certainly something you will be able to use for your association.
+[constipated-koala] is open-sourced and is for associations to track their members, groups, and activities. I'm actually quite happy with it, my first lines of code aren't the best, but they do work. I have implemented some cool features; it is now an OAuth provider for members and has integration with an online payment provider. However, at the moment I cannot open-source it yet since I used some licensed stylesheet but certainly something you will be able to use for your association.
 
 [haml]: http://haml.info/
 [rabl]: https://github.com/nesquena/rabl
 [devise]: https://github.com/plataformatec/devise
 [paperclip]: https://github.com/thoughtbot/paperclip
+
+[constipated-koala]: https://github.com/svsticky/constipated-koala
 
 [login]: /laying-some-track/login.png
 [members]: /laying-some-track/members.png
