@@ -31,3 +31,6 @@ configure :build do
   activate :gzip
   activate :minify_css
 end
+
+# Disable warnings
+Haml::TempleEngine.disable_option_validator!
