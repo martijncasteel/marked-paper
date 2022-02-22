@@ -1,0 +1,453 @@
+@import 'normalize.css';
+@import 'skeleton.css';
+
+/* import Merriweather */
+@import url('//fonts.googleapis.com/css?family=Merriweather:400,300,700');
+
+body {
+  font-family: Merriweather, serif;
+}
+
+::selection {
+  background: #ffa93a;
+}
+
+h1, h2 {
+  color: #333;
+  margin-bottom: 1rem;
+
+  font-size: 3.0rem;
+  line-height: 1.3;
+  letter-spacing: -.1rem;
+}
+
+h3 {
+  font-size: 2.4rem;
+  line-height: 1.35;
+  letter-spacing: -.08rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+  line-height: 1.5;
+  letter-spacing: -.05rem;
+}
+
+h5 {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+/* Larger than phablet */
+@media (min-width: 550px) {
+  h1, h2 {
+    font-size: 3.6rem;
+  }
+  h3 {
+    font-size: 3.0rem;
+  }
+  h4 {
+    font-size: 2.4rem;
+  }
+  h5 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+h1.center {
+  margin-top: 60px;
+}
+
+a.profile {
+  display: block;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fbfbfb;
+  border: 1px solid #ebebeb;
+  padding: 5px;
+  margin: 30px auto 0;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 20px;
+    top: 45px;
+    height: 1px;
+    width: calc(50% - 80px);
+    background-color: #E1E1E1;
+  }
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 20px;
+    top: 45px;
+    height: 1px;
+    width: calc(50% - 80px);
+    background-color: #E1E1E1;
+    left: auto;
+    right: 20px;
+  }
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+  }
+}
+
+@media (min-width: 400px) {
+  a.profile {
+    &:before {
+      left: 0px;
+    }
+    &:after {
+      right: 0px;
+    }
+  }
+}
+
+template {
+  display: none;
+}
+
+article {
+  &:first-of-type {
+    margin-top: 30px;
+  }
+
+  span {
+    font-size: 0.8em;
+    color: gray;
+    display: inline-block;
+    padding-bottom: 10px;
+
+    &.additional {
+      &::before {
+        content: '|';
+        margin: 0 5px;
+      }
+    }
+  }
+
+  a {
+    color: #333;
+    &:hover {
+      color: #333;
+    }
+  }
+
+  > a:first-of-type {
+    text-decoration: none;
+  }
+
+  img, video {
+    max-width: 100%;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+pre.highlight {
+  > code {
+    white-space: normal;
+    display: inline-block;
+
+    > table.rouge-table {
+      margin: 0px;
+
+      th, td {
+        padding-bottom: 0px;
+        border-bottom: none;
+      }
+
+      td.rouge-gutter {
+        border-right: 1px solid #E1E1E1;
+        color: #E1E1E1;
+      }
+
+      td.rouge-code {
+        width: 100%;
+
+        > pre > span {
+          // fixing some strange white spots
+          background-color: transparent !important;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+// styling for the .chat-window
+.chat-window {
+  position: relative;
+  display: inline-block;
+
+  width: 100%;
+  margin-bottom: 2.5rem;
+
+  border: 1px solid rgb(195, 195, 195);
+  border-radius: 4px;
+  box-shadow: 0px 2px 3px 0px rgba(50, 50, 50, 0.11);
+
+  div.header {
+    line-height: 30px;
+    vertical-align: top;
+    padding: 2px 9px 0;
+
+    span.bullet {
+      height: 11px;
+      width: 11px;
+      display: inline-block;
+      border-radius: 100%;
+      vertical-align: middle;
+      margin-right: 5px;
+      padding: 0;
+    }
+
+    span.bullet-close {
+      background: #DF7065;
+      cursor: pointer;
+    }
+
+    span.bullet-minimize {
+      background: #E6BB46;
+    }
+
+    span.bullet-maximize {
+      background: #5BCC8B;
+    }
+  }
+
+  div.body{
+    ul {
+      font-size: 0.8em;
+      list-style-type: none;
+      overflow-y: scroll;
+      height: 50vh;
+
+      li {
+        position: relative;
+        margin-bottom: 2px;
+      }
+
+      span {
+        display: inline-block;
+        padding-left: 10px;
+      }
+
+      span.name {
+        width: 100px;
+        position: absolute;
+        overflow: hidden;
+      }
+
+      span.message, span.event {
+        border-left: solid 1px rgb(195, 195, 195);
+        margin-left: 110px;
+      }
+
+      span.event {
+        color: rgb(195, 195, 195);
+      }
+    }
+  }
+
+  form.terminal {
+    position: relative;
+    width: 100%;
+    bottom: 0px;
+
+    display: inline-block;
+    margin-bottom: 0px;
+
+    > input[name='message'] {
+      width: calc(100% - 119px);
+      background: white;
+
+      position: relative;
+      font-size: 0.8em;
+      left: 5px;
+
+      height: 34px;
+      padding-left: 10px;
+      margin-bottom: 5px;
+
+      border: 1px solid rgb(187, 187, 187);
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
+      outline: none;
+    }
+
+    > input[name='submit'] {
+      width: 98px;
+      background: white;
+      margin-bottom: 5px;
+      padding-left: 27px;
+
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+
+    > span {
+      display: none;
+
+      position: absolute;
+      top: -20px;
+      left: 10px;
+
+      color: gray;
+      font-size: 0.6em;
+    }
+  }
+}
+
+// styling for simple game
+canvas#simple-game {
+  background-color: #001f1f;
+  width: 100%;
+
+  margin-bottom: 25px;
+
+  > audio {
+    display: none;
+  }
+}
+
+// print style, for whoever does that
+@media print {
+  @page {
+    size: A4;
+    margin-top: 2cm;
+  }
+
+  body, h1, h2, p {
+      background: #fff;
+      color: #000;
+  }
+
+  p {
+    page-break-inside: avoid;
+    font-size: 13pt;
+  }
+
+  article:not(:first-child) {
+    page-break-before: always;
+  }
+
+  a.profile {
+    display: none;
+  }
+
+  div.image-slider {
+    overflow: visible;
+
+    > figure {
+      animation: none;
+      width: 100%;
+
+      img {
+        clear: both;
+        width: 100%;
+        margin: 20px 0;
+      }
+    }
+  }
+
+  a[href^='http://']:after, a[href^='https://']:after {
+    color: #1EAEDB;
+    text-decoration: none !important;
+    content: " (" attr(href) ")";
+  }
+
+  .chat-window, canvas {
+    display: none;
+  }
+}
+
+// dark color scheme
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #121212;
+    color: #ececec;
+
+    font-weight: 300;
+  }
+
+  img, video {
+    filter: brightness(.8) contrast(1.2);
+  }
+
+  a.profile {
+    background-color: #fbfbfb;
+    border: 1px solid #30475e;
+
+    &:before, &:after {
+      background-color: #30475e;
+    }
+  } 
+
+  h1, h2 {
+    color: #f2a365;
+  }
+
+  article { 
+    span {
+      color: #ececec;
+    }
+
+    code {
+      background-color: #30475e;
+      border-color: #30475e;
+    }
+
+    a {
+      color: #f2a365;
+
+      &:hover {
+        color: #30475e;
+      }
+    }
+
+    hr {
+      border-top-color: #30475e;
+    }
+  }
+
+  pre.highlight > code > table.rouge-table td.rouge-gutter {
+    color: black;
+    border-right-color: black;
+  }
+
+  .chat-window {
+    border-color: #30475e;
+
+    form.terminal {
+      > input[name='message'] {
+        background: #222831;
+        border-color: #30475e;
+      }
+
+      > input[name='submit'] {
+        background: #222831;
+        border-color: #30475e;
+        color: #ececec;
+      }
+    }
+  }
+}
