@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.4.1)
+    activesupport (6.1.4.6)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -9,7 +9,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
-    backports (3.21.0)
+    backports (3.23.0)
     builder (3.2.4)
     coffee-script (2.4.1)
       coffee-script-source
@@ -21,8 +21,8 @@ GEM
     erubis (2.7.0)
     execjs (2.8.1)
     fast_blank (1.0.1)
-    fastimage (2.2.5)
-    ffi (1.15.4)
+    fastimage (2.2.6)
+    ffi (1.15.5)
     haml (5.2.2)
       temple (>= 0.8.0)
       tilt
@@ -77,7 +77,7 @@ GEM
     middleman-syntax (3.2.0)
       middleman-core (>= 3.2)
       rouge (~> 3.2)
-    minitest (5.14.4)
+    minitest (5.15.0)
     padrino-helpers (0.15.1)
       i18n (>= 0.6.7, < 2)
       padrino-support (= 0.15.1)
@@ -88,17 +88,17 @@ GEM
     public_suffix (4.0.6)
     rack (2.2.3)
     rake (13.0.6)
-    rb-fsevent (0.11.0)
+    rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.5.1)
     rexml (3.2.5)
-    rouge (3.26.1)
+    rouge (3.28.0)
     sassc (2.4.0)
       ffi (~> 1.9)
     servolux (0.13.0)
     temple (0.8.2)
-    thor (1.1.0)
+    thor (1.2.1)
     tilt (2.0.10)
     toml (0.3.0)
       parslet (>= 1.8.0, < 3.0.0)
@@ -107,7 +107,7 @@ GEM
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     webrick (1.7.0)
-    zeitwerk (2.5.1)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
