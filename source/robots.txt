@@ -4,4 +4,4 @@ Allow: /
 Disallow: /style/
 Disallow: /script/
 
-Sitemap: https://martijncasteel.com/sitemap.xml
+Sitemap: https://martijncasteel.nl/sitemap.xml

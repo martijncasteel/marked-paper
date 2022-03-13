@@ -31,7 +31,7 @@ A new small project, something to play around with. A chat application that allo
     <ul>
       <li>
         <span style="color: hsl(359, 50%, 50%)" class="name">martijn</span>
-        <span style="border-color: hsl(359, 50%, 50%)" class="message">Hello! First of all welcome to my blog, this is a chat window you can use to chat with anybody.<br/><br/>Due notice that the chat is not private so anybody can read your messages! For any questions contact me at <a href="mailto:hello@martijncasteel.com">hello@martijncasteel.com</a>.</span>
+        <span style="border-color: hsl(359, 50%, 50%)" class="message">Hello! First of all welcome to my blog, this is a chat window you can use to chat with anybody.<br/><br/>Due notice that the chat is not private so anybody can read your messages! For any questions contact me at <a href="mailto:hello@martijncasteel.nl">hello@martijncasteel.nl</a>.</span>
       </li>
       <li>
         <span style="color: hsl(359, 50%, 50%)" class="name">martijn</span>

@@ -1,6 +1,6 @@
 xml.instruct!
 xml.urlset 'xmlns' => "http://www.sitemaps.org/schemas/sitemap/0.9" do
-  site_url = 'https://martijncasteel.com'
+  site_url = 'https://martijncasteel.nl'
 
   xml.url do
     xml.loc site_url
