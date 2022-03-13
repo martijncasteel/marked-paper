@@ -2,6 +2,7 @@
 title: Chat over websockets
 date: 24 November 2017
 additional: Hello there!
+description: A pratical approach to chat over websockets. A fun way to communicatie with others on my website.
 ---
 
 A new small project, something to play around with. A chat application that allows people to chat on my webpages using websockets.

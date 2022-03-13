@@ -1,6 +1,7 @@
 ---
 title: In between projects
 date: 20 September 2019
+description: I studied software engineering, and I liked to do something with hardware. So i started a project to build a custom led matrix showing gifs.
 ---
 
 At the moment I'm in between projects, I worked a lot on [koala](/laying-some-track). It has been five years since we started this project, and it was fun to do. Other members of the study association are continuing work on koala.

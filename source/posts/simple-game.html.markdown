@@ -1,6 +1,7 @@
 ---
 title: A simple game
 date: 11 November 2020
+description: A recreation of a classic game; pong. I wanted to learn more about the animationloop in javascript.
 ---
 
 To try something new I got the idea to create a very basic game. It's just for fun! And as you can see it appears to be pong, a classic. This game works on laptop with the arrow keys and with your thumb on mobile devices. It is build with plain javascript and fun to do.

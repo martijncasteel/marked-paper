@@ -1,6 +1,7 @@
 ---
 title: Optimizing SEO
 date: 3 June 2017
+description: SEO is a very important part of a website. I'm going to try to optimize it.
 ---
 
 So optimizing a [website](/), where to start? I googled a lot for tools to evaluate websites. So I found a few websites such as [pagespeed](https://developers.google.com/speed/pagespeed/insights/?hl=nl&url=https%3A%2F%2Fmartijncasteel.com%2F) but I ended up with [nibbler](http://nibbler.silktide.com/en_US/reports/martijncasteel.com), a tool grading on several aspects. Aspects such as accessibility, experience, and marketing.

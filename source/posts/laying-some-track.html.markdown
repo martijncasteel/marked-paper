@@ -2,6 +2,7 @@
 title: Laying some track
 date: 5 May 2016
 additional: Choo choo!
+description: I created a membership administration application in Ruby on Rails. You are able to adminstrate memberships, groups, activities, and more. You can find the source code on github.
 ---
 
 Study association [Sticky](https://www.svsticky.nl) is based in Utrecht and is for all IT students on the Utrecht University. Within the association there was a member registration application build in PHP, however, that one started to fall apart. PHP is a language that is great for creating simple applications such as a blog or whatever not too complex, for a larger application with a complex database you would want to at least use a framework.

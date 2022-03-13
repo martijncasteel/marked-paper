@@ -1,6 +1,7 @@
 ---
 title: Tailwindcss
 date: 22 Februari 2022
+description: For fun I created a website using tailwindcss. It is a simple website which won't change much. Read more about it here.
 ---
 
 It's been a while for me to write a blog post. Last weekend I tried out something new, creating a [simple single page](https://ambernorder.nl) website with tailwindcss. I started off with finding a simple html generator, something like haml for npm. I couldn't find one that worked for me, so I decided to stick with plain html. I'll get back to it.

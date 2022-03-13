@@ -12,7 +12,8 @@
 
     = javascript_include_tag 'app', defer: true
 
-    %meta{ :content => 'Well about me, Martijn Casteel, at easy as that!', :name => 'description' }
+    - if current_page.data.description
+      %meta{ :content => current_page.data.description, :name => 'description' }
 
     %title
       Martijn Casteel
@@ -21,7 +22,6 @@
 
 
     %meta{ :property => 'og:title', :content => current_page.title }
-    %meta{ :property => 'og:image', :content => '/images/profile.jpg' }
     %meta{ :property => 'og:type', :content => 'article' }
 
     %meta{ :property => 'og:article:author', :content => 'Martijn Casteel' }
