@@ -22,4 +22,8 @@ jobs:
       - run: bundle exec middleman build
       
       - run: tar -czvf build-$(date +%Y%m%d-%H%M%S).tar.gz build
-
+      
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: build-*.tar.gz
