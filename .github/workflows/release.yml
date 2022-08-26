@@ -1,0 +1,26 @@
+name: build-and-package
+on:
+  push:
+    branches: [ "development" ]
+  pull_request:
+    branches: [ "development" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      - name: setup ruby
+        with:
+          bundler-cache: true
+        
+      - run: bundle exec rake
+      - run: bundle exec middleman build
+      
+      - run: tar -czvf build-$(date +%Y%m%d-%H%M%S).tar.gz build
+
