@@ -19,7 +19,6 @@ jobs:
         with:
           bundler-cache: true
         
-      - run: bundle exec rake
       - run: bundle exec middleman build
       
       - run: tar -czvf build-$(date +%Y%m%d-%H%M%S).tar.gz build
