@@ -23,10 +23,10 @@ jobs:
       
       - run: tar -czvf build.tar.gz build README.md LICENSE
       
-      - uses: actions/upload-artifact@v3
-        with:
-          name: build-$(date +%Y%m%d-%H%M%S)
-          path: build.tar.gz
+#       - uses: actions/upload-artifact@v3
+#         with:
+#           name: build-$(date +%Y%m%d-%H%M%S)
+#           path: build.tar.gz
           
       - uses: svenstaro/upload-release-action@v2
         with:
