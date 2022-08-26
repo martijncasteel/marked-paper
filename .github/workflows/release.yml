@@ -21,8 +21,7 @@ jobs:
         
       - run: bundle exec middleman build
       
-      - run: tar -czvf build.tar.gz build
-      - run: tar --append --file=build.tar.gz README.md
+      - run: tar -czvf build.tar.gz build README.md LICENSE
       
       - uses: actions/upload-artifact@v3
         with:
