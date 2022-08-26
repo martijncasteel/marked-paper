@@ -22,15 +22,15 @@ jobs:
       - run: bundle exec middleman build
       
       - run: tar -czvf build.tar.gz build
+      - run: tar -r build.tar.gz README.md
       
-#       - uses: actions/upload-artifact@v3
-#         with:
-#           name: build-$(date +%Y%m%d-%H%M%S)
-#           path: build-*.tar.gz
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build-$(date +%Y%m%d-%H%M%S)
+          path: build.tar.gz
           
       - uses: svenstaro/upload-release-action@v2
         with:
           file: build.tar.gz
-          asset_name: build
           tag: ${{ github.ref }}
           overwrite: true
