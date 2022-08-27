@@ -29,6 +29,6 @@ jobs:
           
       - uses: svenstaro/upload-release-action@v2
         with:
-          file: checksum
+          file: checksum.sha512
           tag: ${{ github.ref }}
           overwrite: true
