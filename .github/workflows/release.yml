@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
       - uses: ruby/setup-ruby@v1.115.3
@@ -22,14 +21,20 @@ jobs:
       - run: bundle exec middleman build
       
       - run: tar -czvf build.tar.gz build README.md LICENSE
-      
-#       - uses: actions/upload-artifact@v3
-#         with:
-#           name: build-$(date +%Y%m%d-%H%M%S)
-#           path: build.tar.gz
+      - run: sha512sum build.tar.gz > checksum
+
+      - uses: dev-drprasad/delete-tag-and-release@v0.2.0
+        with:
+          tag_name: ${{ github.ref }}
           
       - uses: svenstaro/upload-release-action@v2
         with:
           file: build.tar.gz
+          tag: ${{ github.ref }}
+          overwrite: true
+          
+      - uses: svenstaro/upload-release-action@v2
+        with:
+          file: checksum
           tag: ${{ github.ref }}
           overwrite: true
