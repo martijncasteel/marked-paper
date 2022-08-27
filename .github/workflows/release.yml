@@ -19,7 +19,7 @@ jobs:
       - run: bundle exec middleman build
       
       - run: tar -czvf build.tar.gz build README.md LICENSE
-      - run: sha512sum build.tar.gz > checksum
+      - run: sha512sum build.tar.gz > checksum.sha512
           
       - uses: svenstaro/upload-release-action@v2
         with:
