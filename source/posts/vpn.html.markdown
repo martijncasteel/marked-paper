@@ -1,3 +1,9 @@
+---
+title: Pottery Throwdown
+date: 30 April 2024
+description: Small project to be able to create a vpn 
+---
+
 During a holiday in the UK we encountered a great show called _Pottery Throwdown_. Which is a great show about pottery, since then we have done a workshop to do our pottery. Pottery Throwdown is free to watch on channel 4 in the UK, unfortunately I cannot watch it at home. 
 
 Flustered by this, as any IT guy would do, I created something to fix this issue. Using Ansible I am now able to set up an on-the-fly vpn server in the UK to connect to from home. Using [Wireguard](https://www.wireguard.com/) I can act if I'm in Londen. 
