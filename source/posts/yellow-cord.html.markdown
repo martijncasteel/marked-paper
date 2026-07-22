@@ -2,6 +2,7 @@
 title: Pulling the cord
 date: 16 August 2017
 additional: Being lean
+image: yellow-cord/rotating-beacon.webp
 ---
 
 A few weeks ago I had a course called Yellow belt, a basic introduction of lean. There are a few belts, next one I'm planning is the green belt. Something like judo, without being physical you need to find a way to improve a process. Any process can be improved, using a few methods you can find improvements. Ask why five times and find the true underlying problem.
