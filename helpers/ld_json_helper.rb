@@ -17,7 +17,10 @@ module LdJsonHelper
         "url": "https://martijncasteel.nl",
         "jobTitle": "IT Professional & product owner",
         "knowsAbout": ["Computer Science", "Technical Artificial Intelligence", "Programming"],
-        "sameAs": ["https://www.linkedin.com/in/martijncasteel/"]
+        "sameAs": [
+          "https://www.linkedin.com/in/martijncasteel/",
+          "https://github.com/martijncasteel"
+        ]
       },
       {
         "@type": "WebPage",
