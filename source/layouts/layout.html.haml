@@ -41,7 +41,7 @@
 
     ~ yield
 
-    - blog.articles[0..1].each do |article|
+    - blog.articles[0..2].each do |article|
       %article
 
         = link_to article.url do
@@ -56,7 +56,7 @@
 
         %hr
 
-    - blog.articles.drop(2).each do |article|
+    - blog.articles.drop(3).each do |article|
       %article{ 'data-url' => article.url + '/' }
 
     %script{type: "application/ld+json"}= ld_json
